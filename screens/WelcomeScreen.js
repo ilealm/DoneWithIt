@@ -6,9 +6,9 @@ import { View,
   Image,
  } from 'react-native';
 
-const image = { uri: "./assets/background.jpg" };
-// const image = { uri: "https://reactjs.org/logo-og.png" };
-
+// const image = { uri: "./assets/background.jpg" };
+const image = { uri: "https://reactjs.org/logo-og.png" };
+const logo = { uri: "https://image-placeholder.com/images/actual-size/75x75.png"}
 
 const Welcome = () => (
     <View style= {{
@@ -17,12 +17,10 @@ const Welcome = () => (
     }}>
       <View style = { styles.container }>
         <ImageBackground source={image} style={styles.image}>
-
+          <Image source= {logo} style={ styles.logo} ></Image>
           <Text style={ styles.text } >Sell What You Don't Need </Text>
         </ImageBackground>
-        <Image source = {{uri : './assets/logo-red.png'}}>
-
-        </Image>
+   
       </View>
 
       <View style={{
@@ -45,19 +43,27 @@ const Welcome = () => (
 const styles = StyleSheet.create({
   container : {
     // flex: 1,
-    flexDirection: "column",
+    // flexDirection: "column",
     height:'80%',
   },
   image: {
     flex: 1,
     resizeMode: "cover",
     justifyContent: "center",
-    width:  200,
-    height: 200,
+    width: '100%',
+    height: '100%',
   },
   text: {
     fontSize: 15,
   },  
+  logo: {
+    width: '20%',
+    height: '20%',
+    // flex:1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "flex-start",
+  }
 })
 
 
