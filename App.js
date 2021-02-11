@@ -19,8 +19,7 @@ export default function App() {
         justifyContent: "center",
         alignItems:"center", 
       }} >
-        <AppText          
-        >
+        <AppText>
           I love React Native this is my first react native app! Here is so more text
         </AppText>
     </View>
