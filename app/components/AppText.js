@@ -30,17 +30,18 @@ const styles = StyleSheet.create({
     color:"tomato",
 
     // This method returns one of these objs depending on the current platform
-    // so I need to spred this objs to access and copy the properties
+    // so I need to spred this objs to access and copy the properties. The spread operator can be 
+    // used to take an existing array and add another element to it while still preserving the original array.
     // Platform.select({
-    ...Platform.select({
-      ios:{
-        fontSize: 20,
-        fontFamily: "Avenir",
-      },
-      android:{
-        fontSize: 18,
-        fontFamily: "Roboto",
-      },
+    // ...Platform.select({
+    //   ios:{
+    //     fontSize: 20,
+    //     fontFamily: "Avenir",
+    //   },
+    //   android:{
+    //     fontSize: 18,
+    //     fontFamily: "Roboto",
+    //   },
     })
     // fontSize: 18,
     // fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir", //is case sensive
