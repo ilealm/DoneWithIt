@@ -25,11 +25,25 @@ function AppText({children}){
   );
 }
 
-
 const styles = StyleSheet.create({
   text:{
-    fontSize: 18,
-    fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir", //is case sensive
+    color:"tomato",
+
+    // This method returns one of these objs depending on the current platform
+    // so I need to spred this objs to access and copy the properties
+    // Platform.select({
+    ...Platform.select({
+      ios:{
+        fontSize: 20,
+        fontFamily: "Avenir",
+      },
+      android:{
+        fontSize: 18,
+        fontFamily: "Roboto",
+      },
+    })
+    // fontSize: 18,
+    // fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir", //is case sensive
   }
 })
 
