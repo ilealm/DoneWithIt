@@ -1,26 +1,25 @@
 import React from 'react';
 import { Image, ImageBackground, StyleSheet, View, Text, } from 'react-native';
+import AppButton from '../components/AppButton';
 
 // import AppButton from '../components/old_AppButton'
 
 function WelcomeScreen(props) {
   return (
    <ImageBackground 
+    blurRadius={10}
     style={styles.background} 
     source={require('../assets/background.jpg')} >
       <View style={styles.logoContainer}>
         <Image style={styles.logo} source={require('../assets/logo-red.png')} />
-        <Text> Sell What You Dont Need </Text>
+        <Text style={styles.tagline}> Sell What You Dont Need </Text>
       </View>
 
-      {/* <AppButton color="primary"> 
-        <Text> Login </Text> 
-      </AppButton>
-      <AppButton color="secondary"> 
-        <Text> Register </Text> 
-      </AppButton> */}
-      {/* <View style={styles.logginButton}></View> */}
-      {/* <View style={styles.registerButton}></View> */}
+      <View style={styles.buttonsContainer}>
+        <AppButton title='Login' />
+        <AppButton title='Register' color='secondary' />        
+      </View>
+
    </ImageBackground>
   );
 }
@@ -33,10 +32,10 @@ const styles = StyleSheet.create({
     justifyContent:'flex-end', // this will put the btns at the end, BC the primary axis is in. The default is flex-start 
     alignItems:'center', // centers along the secondary axis
   },
-  logginButton:{
-    width: '100%',
-    height: 70,
-    backgroundColor:'#fc5c65',
+  buttonsContainer:{
+    padding: 20,
+    width: '100%',  // this one is the one in charge to make longer the buttons
+
   },
   logo:{
     width:100,
@@ -47,10 +46,10 @@ const styles = StyleSheet.create({
     top: 70,    
     alignItems:'center', // I need to put it here again BC is inside a new container, and te aligment reserts.
   },
-  registerButton:{
-    width: '100%',
-    height: 70,
-    backgroundColor:'#4ecdc4',
+  tagline:{
+    fontSize: 25,
+    fontWeight: "600",
+    paddingVertical: 20,
   },
 })
 
