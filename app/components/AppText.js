@@ -6,10 +6,14 @@ import React from 'react';
 import { Text } from 'react-native';
 
 // {/* also I could use destructuring for prop argument and access the child */}
-function AppText({children}){
+// I need to pass style prop so I can apply it here.
+function AppText({children, style}){
   return(
     // <Text style={styles.text}>
-    <Text >
+    // <Text >
+    //   {children} 
+    // </Text>
+    <Text style={[styles.text, style]}>
       {children} 
     </Text>
   );
