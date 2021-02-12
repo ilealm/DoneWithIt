@@ -1,38 +1,33 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native';
 
 import colors from '../config/colors';
 
-function AppButton({children}) {
+// I'm going to deconstructure the props
+function AppButton({title}) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>
-        {children}
-      </Text>
+    <View style={styles.button}>
+      <Text style={styles.text}> {title} </Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container:{
-    justifyContent: "center",
-    alignItems: "center", 
-    width: "100%",
-    height: 70,
-    backgroundColor: colors.primary,
-    // backgroundColor: colors.{this.props.color},
-    borderTopLeftRadius: 25,
-    borderBottomLeftRadius: 25,
-    borderTopRightRadius: 25,
-    borderBottomRightRadius: 25,
-    // borderBottomWidth: 10,
+  button:{
+    backgroundColor : colors.primary,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 15, 
+    width: '100%',
   },
   text:{
     color: colors.white,
-    textTransform: "uppercase",
-    fontWeight:"bold",
-    // fontVariant:""
-  },
+    fontSize: 18,
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
+  }
+    
 })
 
 export default AppButton;

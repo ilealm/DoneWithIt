@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, ImageBackground, StyleSheet, View, Text, } from 'react-native';
 
-import AppButton from '../components/AppButton'
+// import AppButton from '../components/old_AppButton'
 
 function WelcomeScreen(props) {
   return (
@@ -13,12 +13,12 @@ function WelcomeScreen(props) {
         <Text> Sell What You Dont Need </Text>
       </View>
 
-      <AppButton color="primary"> 
+      {/* <AppButton color="primary"> 
         <Text> Login </Text> 
       </AppButton>
       <AppButton color="secondary"> 
         <Text> Register </Text> 
-      </AppButton>
+      </AppButton> */}
       {/* <View style={styles.logginButton}></View> */}
       {/* <View style={styles.registerButton}></View> */}
    </ImageBackground>
