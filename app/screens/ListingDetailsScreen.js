@@ -1,8 +1,10 @@
 import React from 'react';
 
 import { View, StyleSheet, Image } from 'react-native'
-import AppText from '../components/AppText';
 
+
+import AppText from '../components/AppText';
+import ListItem from '../components/ListItem';
 import colors from '../config/colors';
 
 function ListingDetailsScreen(props) {
@@ -14,6 +16,12 @@ function ListingDetailsScreen(props) {
         {/* here I'm saying price and not subTitle BC this page is not intended to reuse */}
         <AppText style={styles.price}>$100 </AppText>        
       </View>
+      {/* This component display the seller image, name and listings */}
+      <ListItem
+        image={require("../assets/dow.jpg")}
+        title="Josh Dow"
+        subTitle= "5 Listings" 
+      />
     </View>
     );
 }
