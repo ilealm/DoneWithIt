@@ -1,14 +1,15 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 import colors from '../config/colors';
 
 // I'm going to deconstructure the props
-function AppButton({title}) {
+// I can have a cleaner and clear code.
+function AppButton({title, onPress}) {
   return (
-    <View style={styles.button}>
-      <Text style={styles.text}> {title} </Text>
-    </View>
+    <TouchableOpacity  style={styles.button} onPress={onPress}> 
+        <Text style={styles.text}> {title} </Text>
+    </TouchableOpacity>
   );
 }
 

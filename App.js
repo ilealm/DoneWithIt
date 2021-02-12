@@ -19,7 +19,8 @@ export default function App() {
         alignItems:"center", 
       }} >
         {/* <AppText>I love React Native</AppText> */}
-        <AppButton title="Login" />
+        {/* <AppButton title="Login" onPress={() => console.log('Tapped!')} /> */}
+        <AppButton title="Login" onPress={() => console.log('Tapped :-)')} />
     </View>
   );
 }
