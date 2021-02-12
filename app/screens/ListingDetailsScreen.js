@@ -16,12 +16,15 @@ function ListingDetailsScreen(props) {
         {/* here I'm saying price and not subTitle BC this page is not intended to reuse */}
         <AppText style={styles.price}>$100 </AppText>        
       </View>
-      {/* This component display the seller image, name and listings */}
-      <ListItem
-        image={require("../assets/dow.jpg")}
-        title="Josh Dow"
-        subTitle= "5 Listings" 
-      />
+      <View style={styles.userContainer}>
+        {/* This component display the seller image, name and listings */}
+        <ListItem
+          image={require("../assets/dow.jpg")}
+          title="Josh Dow"
+          subTitle= "5 Listings" 
+        />
+
+      </View>
     </View>
     );
 }
@@ -43,6 +46,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "500",
+  },
+  userContainer:{
+    marginLeft: 20, // I added this
+    marginVertical: 40,
   },
 })
 
