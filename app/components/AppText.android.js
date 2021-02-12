@@ -7,9 +7,13 @@ import { Text, StyleSheet,  } from 'react-native';
 
 import colors from '../config/colors';
 
-function AppText({children}){
+function AppText({children, style}){
   return(
-    <Text style={styles.text}>
+    // <Text style={styles.text}>
+    //   {children} 
+    // </Text>
+    // I'm adding an array so I can receive the style as a prop
+    <Text style={[styles.text, style]}>
       {children} 
     </Text>
   );
@@ -17,8 +21,9 @@ function AppText({children}){
 
 const styles = StyleSheet.create({
   text:{
-    color: colors.primary,
-    fontSize: 25,
+    // color: colors.primary,
+    color: colors.black,
+    fontSize: 20,
     fontFamily: "Roboto",
   }
 })

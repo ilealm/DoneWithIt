@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
   buttonsContainer:{
     padding: 20,
     width: '100%',  // this one is the one in charge to make longer the buttons
-
   },
   logo:{
     width:100,
