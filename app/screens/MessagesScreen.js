@@ -1,11 +1,12 @@
 import React from 'react';
-import { FlatList, StyleSheet, } from 'react-native';
+import { FlatList, StyleSheet, View, } from 'react-native';
 // expo-constants gives a lot of info about the current platform.
 import Constants from 'expo-constants';  //this don't need to be wrapped in {} 
 
 
 import ListItem from '../components/ListItem';
 import Screen from '../components/Screen';
+import ListItemSeparator from '../components/ListItemSeparator';
 
 const messages= [
   {
@@ -36,6 +37,13 @@ function MessagesScreen(props) {
             subTitle = {item.description}
             image = {item.image}
           />} // fun. to render each item
+          // now, I want to add some space between items. I do it here so I don't have a last space floating
+          // the ItemSeparatorComponent DOES NOT ADD THE last one
+          // note the "I" is capitalized, so I need to pass a component
+          ItemSeparatorComponent= {ListItemSeparator}
+        // ItemSeparatorComponent= {() => 
+        //   <View style={{width:'100%', height:1, backgroundColor:'#000'}} />                        
+        // }
       />
     </Screen>
   );

@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   container:{
     // I need to set the flex direction to row BS I need to lay out this horiz.
     flexDirection: 'row', // the defaul is set to column
+    padding: 15,
   },
   image:{
     width: 70,
