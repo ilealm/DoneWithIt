@@ -1,28 +1,34 @@
 import React from 'react';
 import { View, StyleSheet, Image, TouchableHighlight } from 'react-native'
 import AppText from './AppText';
+// for using this, I need to install the UI library React Native Gesture Handler
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 import colors from '../config/colors';
 
 // added onPress to let the TouchableHighLight behaves based on its consumer
-function ListItem({title, subTitle, image, onPress}) {
+function ListItem({title, subTitle, image, onPress, renderRightActions}) {
   return (
-    // for TouchableHighlight I need to handle the onPress event
-    <TouchableHighlight 
-      onPress={onPress}  // what this does should be in base of the component's consumer
-      underlayColor={colors.light}  // black is default
-     >  
-    {/* in this container I will lay out horiz */}
-      <View style={styles.container}>
-          <Image style={styles.image} source={image} />
-          {/* in this container I will lay out vertically */}
-          <View>
-            <AppText style={styles.title}>{title}</AppText>
-            <AppText style={styles.subTitle}>{subTitle}</AppText>
-          </View>
-      </View>
+    <Swipeable
+      renderRightActions={renderRightActions}
+    >
 
-    </TouchableHighlight>
+        {/* for TouchableHighlight I need to handle the onPress event */}
+        <TouchableHighlight 
+          onPress={onPress}  // what this does should be in base of the component's consumer
+          underlayColor={colors.light}  // black is default
+          >  
+        {/* in this container I will lay out horiz */}
+          <View style={styles.container}>
+              <Image style={styles.image} source={image} />
+              {/* in this container I will lay out vertically */}
+              <View>
+                <AppText style={styles.title}>{title}</AppText>
+                <AppText style={styles.subTitle}>{subTitle}</AppText>
+              </View>
+          </View>
+        </TouchableHighlight>
+      </Swipeable>
   );
 }
 

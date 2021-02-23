@@ -4,9 +4,12 @@ import { FlatList, StyleSheet, View, } from 'react-native';
 import Constants from 'expo-constants';  //this don't need to be wrapped in {} 
 
 
+
+
 import ListItem from '../components/ListItem';
 import Screen from '../components/Screen';
 import ListItemSeparator from '../components/ListItemSeparator';
+import ListItemDeleteAction from '../components/ListItemDeleteAction';
 
 const messages= [
   {
@@ -37,6 +40,7 @@ function MessagesScreen(props) {
             subTitle = {item.description}
             image = {item.image}
             onPress={() => console.log('Message selected. ToDo send to another screen')}
+            renderRightActions={ ListItemDeleteAction }
           />} // fun. to render each item
           // now, I want to add some space between items. I do it here so I don't have a last space floating
           // the ItemSeparatorComponent DOES NOT ADD THE last one
