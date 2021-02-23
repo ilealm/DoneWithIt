@@ -36,6 +36,7 @@ function MessagesScreen(props) {
             title={ item.title }
             subTitle = {item.description}
             image = {item.image}
+            onPress={() => console.log('Message selected. ToDo send to another screen')}
           />} // fun. to render each item
           // now, I want to add some space between items. I do it here so I don't have a last space floating
           // the ItemSeparatorComponent DOES NOT ADD THE last one

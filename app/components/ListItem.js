@@ -1,27 +1,35 @@
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native'
+import { View, StyleSheet, Image, TouchableHighlight } from 'react-native'
 import AppText from './AppText';
 
 import colors from '../config/colors';
 
-function ListItem({title, subTitle, image}) {
+// added onPress to let the TouchableHighLight behaves based on its consumer
+function ListItem({title, subTitle, image, onPress}) {
   return (
-    // in this container I will lay out horiz
-    <View style={styles.container}>
-        <Image style={styles.image} source={image} />
-        {/* in this container I will lay out vertically */}
-        <View>
-          <AppText style={styles.title}>{title}</AppText>
-          <AppText style={styles.subTitle}>{subTitle}</AppText>
-        </View>
-    </View>
+    // for TouchableHighlight I need to handle the onPress event
+    <TouchableHighlight 
+      onPress={onPress}  // what this does should be in base of the component's consumer
+      underlayColor={colors.light}  // black is default
+     >  
+    {/* in this container I will lay out horiz */}
+      <View style={styles.container}>
+          <Image style={styles.image} source={image} />
+          {/* in this container I will lay out vertically */}
+          <View>
+            <AppText style={styles.title}>{title}</AppText>
+            <AppText style={styles.subTitle}>{subTitle}</AppText>
+          </View>
+      </View>
+
+    </TouchableHighlight>
   );
 }
 
 const styles = StyleSheet.create({
   container:{
     // I need to set the flex direction to row BS I need to lay out this horiz.
-    flexDirection: 'row', // the defaul is set to column
+    flexDirection: 'row', // row= left to right. The defaul is column (Top to bottom)
     padding: 15,
   },
   image:{
