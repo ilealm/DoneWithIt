@@ -20,7 +20,8 @@ function Screen({children}) {
  
 const styles = StyleSheet.create({
   screen: {
-    paddingTop: Constants.statusBarHeight
+    paddingTop: Constants.statusBarHeight,
+    flex: 1, // if I don't use it, the screen only took what it needs. And if I pull to refresh the screen is not cutted.
   }
 })
 

@@ -26,6 +26,7 @@ const initialMessages= [
 
 
 function MessagesScreen(props) {
+  // VARIABLES MUST BE DECLARED HERE, AT THE BEGGINING
   // this fun. receives a message
   // will delete a message from the messages array
   // call the server to delete the message from the backend. TB implemented
@@ -36,6 +37,8 @@ function MessagesScreen(props) {
   // const setCount = array[1];
   // I can desctruct the last 3 lines:
   const [messages, setMessages] = useState(initialMessages);  //useState returns an array [0= variable, 1=upd fun value]
+  // var to implement pull to refresh
+  const [refreshing, setRefreshing] = useState(false); // BC this returns an array, I use const []
 
   const handleDelete = message => { 
     // to delete a single element, I can use the filter method.
@@ -47,7 +50,7 @@ function MessagesScreen(props) {
     setMessages(messages.filter( m => m.id !== message.id ));
   }
 
-  
+
   return(
     // <Screen styles={styles.screen}> 
     <Screen> 
@@ -70,6 +73,17 @@ function MessagesScreen(props) {
           // the ItemSeparatorComponent DOES NOT ADD THE last one
           // note the "I" is capitalized, so I need to pass a component
           ItemSeparatorComponent= {ListItemSeparator}
+          refreshing = {refreshing} //bool var
+          onRefresh = {() => 
+            setMessages( [
+              {
+                id: 2,
+                title: 'T2',
+                description:"Refresed",
+                image: require('../assets/dow.jpg')  // use requere to load an image statically
+              }
+            ]
+            )}
         // ItemSeparatorComponent= {() => 
         //   <View style={{width:'100%', height:1, backgroundColor:'#000'}} />                        
         // }

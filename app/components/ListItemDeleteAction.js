@@ -21,8 +21,6 @@ function ListItemDeleteAction({ onPress }) {
         />
       </View>
     </TouchableWithoutFeedback>
-
-
     
   );
 }
