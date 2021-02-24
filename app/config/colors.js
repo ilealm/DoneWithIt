@@ -6,4 +6,5 @@ export default {
   medium: "#6e6969", 
   light: '#e0dcdc', // originaly was #f8f4f4
   danger: '#ff5252',
+  logout: '#ffee66d',
 };
