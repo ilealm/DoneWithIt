@@ -47,6 +47,7 @@ function MessagesScreen(props) {
     setMessages(messages.filter( m => m.id !== message.id ));
   }
 
+  
   return(
     // <Screen styles={styles.screen}> 
     <Screen> 

@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
   container:{
     backgroundColor: colors.danger,
     width: 70,
+    height: "100%",  // this fixed the hight of the trash-can when swipped to left
     justifyContent: "center",
     alignItems: "center",
   }
