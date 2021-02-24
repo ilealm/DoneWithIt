@@ -9,11 +9,13 @@ import colors from '../config/colors';
 // added onPress to let the TouchableHighLight behaves based on its consumer
 function ListItem({title, subTitle, image, onPress, renderRightActions}) {
   return (
+    // this one is for swaping to the left
     <Swipeable
       renderRightActions={renderRightActions}
     >
 
         {/* for TouchableHighlight I need to handle the onPress event */}
+        {/* this one is for clicking on the element */}
         <TouchableHighlight 
           onPress={onPress}  // what this does should be in base of the component's consumer
           underlayColor={colors.light}  // black is default
@@ -28,7 +30,7 @@ function ListItem({title, subTitle, image, onPress, renderRightActions}) {
               </View>
           </View>
         </TouchableHighlight>
-      </Swipeable>
+    </Swipeable>
   );
 }
 

@@ -1,9 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FlatList, StyleSheet, View, } from 'react-native';
 // expo-constants gives a lot of info about the current platform.
 import Constants from 'expo-constants';  //this don't need to be wrapped in {} 
-
-
 
 
 import ListItem from '../components/ListItem';
@@ -11,7 +9,7 @@ import Screen from '../components/Screen';
 import ListItemSeparator from '../components/ListItemSeparator';
 import ListItemDeleteAction from '../components/ListItemDeleteAction';
 
-const messages= [
+const initialMessages= [
   {
     id: 1,
     title: 'T1',
@@ -26,7 +24,29 @@ const messages= [
   }
 ]
 
+
 function MessagesScreen(props) {
+  // this fun. receives a message
+  // will delete a message from the messages array
+  // call the server to delete the message from the backend. TB implemented
+  // useState returns an array, the [0] is the state variable and [1] is the fun to upd the variable.
+  // by convention is called set<Variable>
+  // const array = useState(0); // 0 is the initial value
+  // const count = array[0];
+  // const setCount = array[1];
+  // I can desctruct the last 3 lines:
+  const [messages, setMessages] = useState(initialMessages);  //useState returns an array [0= variable, 1=upd fun value]
+
+  const handleDelete = message => { 
+    // to delete a single element, I can use the filter method.
+    // I want all the messages EXCEPT the selected message
+    // const newMessages = messages.filter( m => m.id !== message.id );  // this returns a new array
+    // setMessages(newMessages); // this update the state and call a re-render
+
+    // to put the past lines in one:
+    setMessages(messages.filter( m => m.id !== message.id ));
+  }
+
   return(
     // <Screen styles={styles.screen}> 
     <Screen> 
@@ -40,7 +60,10 @@ function MessagesScreen(props) {
             subTitle = {item.description}
             image = {item.image}
             onPress={() => console.log('Message selected. ToDo send to another screen')}
-            renderRightActions={ ListItemDeleteAction }
+            // renderRightActions={ ListItemDeleteAction } // with this syntax I can't pass the prop onPress, so I need to change to a function
+            renderRightActions={ () => 
+              <ListItemDeleteAction onPress= { () => handleDelete(item)} 
+            /> } // with this syntax I can't pass the prop onPress, so I need to change to a function
           />} // fun. to render each item
           // now, I want to add some space between items. I do it here so I don't have a last space floating
           // the ItemSeparatorComponent DOES NOT ADD THE last one

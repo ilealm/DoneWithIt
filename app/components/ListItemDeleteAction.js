@@ -2,20 +2,28 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-// for using this, I need to install the UI library React Native Gesture Handler
-import Swipeable from 'react-native-gesture-handler/Swipeable';
-
 import colors from '../config/colors';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
-function ListItemDeleteAction(props) {
+
+// onPress is a function passed from "the outside", the caller/parent
+function ListItemDeleteAction({ onPress }) {
   return (
-    <View style={styles.container}>
-      <MaterialCommunityIcons 
-        name= 'trash-can'
-        size={35}
-        color={colors.white} 
-      />
-    </View>
+    // To delete an item, I need to wrap this a touchable component to handle the onPress event
+    // onPress will receive the action to behave depenging on its caller.
+    // when I add teh next line, the trash can gets smaller
+    <TouchableWithoutFeedback onPress={ onPress } >
+      <View style={styles.container}>
+        <MaterialCommunityIcons 
+          name= 'trash-can'
+          size={35}
+          color={colors.white} 
+        />
+      </View>
+    </TouchableWithoutFeedback>
+
+
+    
   );
 }
 
