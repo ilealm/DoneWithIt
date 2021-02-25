@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     // I need to set the flex direction to row BS I need to lay out this horiz.
     flexDirection: 'row', // row= left to right. The defaul is column (Top to bottom)
     padding: 15,
+    backgroundColor: colors.white,  // if I want this component reusable for any solution, I may need to change this color here.
   },
   detailsContainer:{
     marginLeft :10,

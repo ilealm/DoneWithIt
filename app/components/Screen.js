@@ -8,9 +8,12 @@ import Constants from 'expo-constants';  //this don't need to be wrapped in {}
 
 //  function Screen(props) {
 // simplify the idea by deconstructuring the props
-function Screen({children}) {
+// I need to pass the style as a prop, BC is not supported on the caller.
+function Screen({children, style }) {
    return (
-     <SafeAreaView style={styles.screen} >
+    //  <SafeAreaView style={styles.screen} >
+    // here now I have an array with styles, the one decalred here, and the one send as props
+     <SafeAreaView style={[styles.screen, style]} >
        {/* I'm passing children so I can use this component in the same way I use SafeAreaView. Is same idea on AppText */}
        {children}  
      </SafeAreaView>
