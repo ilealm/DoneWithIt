@@ -26,7 +26,6 @@ const menuItems = [
   },
 ]
 
-
 function AccountScreen(props) {
   return (
     <Screen style={styles.screen}>
@@ -38,7 +37,7 @@ function AccountScreen(props) {
           image={require('../assets/dow.jpg')}  />
         </View>
       {/* here are the menu Items */}
-      <View styles={styles.container} >
+      <View style={styles.container} >
         <FlatList
           data = {menuItems }
           // keyExtractor MUST have a unique key
@@ -48,7 +47,7 @@ function AccountScreen(props) {
           renderItem={({item}) => 
           <ListItem 
             title = {item.title}
-            ImageComponent = {
+            IconComponent = {
               <Icon 
                 name={item.icon.name} 
                 backgroundColor={item.icon.backgroundColor} 
@@ -62,7 +61,7 @@ function AccountScreen(props) {
       {/* Log out area */}
       <ListItem
         title="Log out"
-        ImageComponent={
+        IconComponent={
           <Icon name="logout" backgroundColor="#ffe66d" /> }  />
     </Screen>
   );

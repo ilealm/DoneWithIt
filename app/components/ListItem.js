@@ -7,8 +7,8 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 import colors from '../config/colors';
 
 // added onPress to let the TouchableHighLight behaves based on its consumer
-// ImageComponent is a real component passed as props
-function ListItem({title, subTitle, image, ImageComponent, onPress, renderRightActions}) {
+// IconComponent is a real component passed as props
+function ListItem({title, subTitle, image, IconComponent, onPress, renderRightActions}) {
   return (
     // this one is for swaping to the left
     <Swipeable
@@ -23,7 +23,7 @@ function ListItem({title, subTitle, image, ImageComponent, onPress, renderRightA
         {/* in this container I will lay out horiz */}
           <View style={styles.container}>
               {/* if I don't pass the props, no error is raised. */}
-              {ImageComponent}  
+              {IconComponent}  
               {/* conditional rending in react */}
               {/* render a image ONLY if is provided. */}
               { image && <Image style={styles.image} source={image} />}
