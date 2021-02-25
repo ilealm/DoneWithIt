@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, {useState} from 'react';
+import { View, Text, TextInput } from 'react-native';
 
 import WelcomeScreen from './app/screens/WelcomeScreen';
 
@@ -14,40 +14,18 @@ import Icon from './app/components/Icon';
 import ListItem from './app/components/ListItem';
 import AccountScreen from './app/screens/AccountScreen';
 import ListingScreens from './app/screens/ListingScreens';
+import AppTextInput from './app/components/AppTextInput';
 
 export default function App() {  
+     const [firstName, setFirstName] =  useState('');
   return (  
+      <Screen>
+            <AppTextInput placeholder="Username" icon="email" />
+      </Screen>
 
-      <ListingScreens />
-      // <AccountScreen />
     
-      // <Screen>
-      //      <ListItem title='My title' 
-      // //      subTitle="My Subtitle" 
-      //             ImageComponent={<Icon name="email" />}
-      //      />
-      // </Screen>
-      
-      //   <MessagesScreen />
-      // <ViewImageScreen />
-   // <ListingDetailsScreen />
-    
-///////////////////////
       // <WelcomeScreen/> 
-///////////////////////
-      // <View style={{
-      //   backgroundColor:'#f8f4f4',
-      //   padding: 20,
-      //   paddingTop: 100,
-        
-      // }}>
-      //   <Card 
-      //     title= "Red jacket for sale"
-      //     subTitle="$100"
-      //     image = {require("./app/assets/jacket.jpg")}
-      //     // image={require("./app/assets/jacket.jpg")}
-      //   />
-      // </View>
+  
 
   );
 }
