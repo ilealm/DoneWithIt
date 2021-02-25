@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { FlatList, StyleSheet, View, } from 'react-native';
-// expo-constants gives a lot of info about the current platform.
-import Constants from 'expo-constants';  //this don't need to be wrapped in {} 
 
 
-import ListItem from '../components/ListItem';
 import Screen from '../components/Screen';
+import ListItem from '../components/ListItem';
 import ListItemSeparator from '../components/ListItemSeparator';
 import ListItemDeleteAction from '../components/ListItemDeleteAction';
 
