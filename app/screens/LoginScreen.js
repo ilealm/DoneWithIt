@@ -11,7 +11,7 @@ function LoginScreen(props) {
   const [password, setPassword] = useState();
 
   return (
-    <Screen>
+    <Screen style={styles.container}>
       <Image style={styles.logo}
        source={require("../assets/logo-red.png")} />
 
@@ -45,6 +45,9 @@ function LoginScreen(props) {
 }
 
 const styles = StyleSheet.create({
+  container:{
+    padding: 10,
+  },
   logo:{
     width: 80,
     height: 80,
