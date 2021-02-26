@@ -3,9 +3,9 @@ import { Image, StyleSheet } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import AppText from '../components/AppText';
-import AppTextInput from '../components/AppTextInput';
 import AppButton from '../components/AppButton';
+import AppTextInput from '../components/AppTextInput';
+import ErrorMessage from '../components/ErrorMessage';
 import Screen from '../components/Screen';
 
 
@@ -52,8 +52,7 @@ function LoginScreen(props) {
               textContentType="emailAddress" //will autofill the address from the cache. only works in iOS
               keyboardType="email-address"
             />
-            <AppText  style={{color:'red'}} > {errors.email } </AppText>
-
+          <ErrorMessage error={errors.email} />
             <AppTextInput 
               autoCapitalize="none"
               autoCorrect={false}
@@ -63,8 +62,7 @@ function LoginScreen(props) {
               secureTextEntry
               textContentType="password" //autofil from keychain, just iOS
             />
-            <AppText  style={{color:'red'}} > {errors.password } </AppText>
-
+            <ErrorMessage error={errors.password} />
             <AppButton 
               title="Login"
               onPress={handleSubmit}  //this will case the form to be submitted
@@ -72,9 +70,6 @@ function LoginScreen(props) {
           </>
         ) }
       </Formik>
-
-      
-
     </Screen>
   );
 }
