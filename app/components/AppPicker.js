@@ -2,12 +2,14 @@
  * Because Picker is depracated, I'm creatrig my own component that behaves the same
  */
 import React, {useState} from 'react';
-import { View, StyleSheet, TouchableWithoutFeedback, Modal, Button  } from 'react-native';
+import { View, StyleSheet, TouchableWithoutFeedback, Modal, Button, FlatList  } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import Screen from './Screen'
 import defaultStyles from '../config/styles';
 import AppText from './AppText';
+import PickerItem from './PickerItem'
+
 
 // I can use the rest operator "..." and get the rest of the props and put inside a single object. Whatever those props are
 // For instance, if this.props contained a: 1 and b: 2, then
@@ -15,7 +17,7 @@ import AppText from './AppText';
 // would be the same as
 // <Modal a={this.props.a} b={this.props.b} title='Modal heading' animation={false}>
 
-function AppPicker({ icon, placeholder,  ...otherProps }) {
+function AppPicker({ icon, items, placeholder  }) {
   const [modalVisible, setModalVisible] = useState(false)
   return (
     // I need to implement a fragment BC I'm returning more than 1 component. 
@@ -42,7 +44,18 @@ function AppPicker({ icon, placeholder,  ...otherProps }) {
       <Modal visible={modalVisible} animationType="slide">
             {/* Adding screen so the componet doesn't hide behind the iOS nudge */}
             <Screen>
+              {/* Render the items in a FlatList */}
               <Button title="Close" onPress={() => setModalVisible(false)} />
+              <FlatList 
+                data={items}
+                keyExtractor={item => item.value.toString()}  // is expecting a function, I CAN'T use {items.value}
+                // renderItems expects a func. that I'm desctucturing right away
+                renderItem={({item}) => 
+                  <PickerItem 
+                    label={item.label} 
+                    onPress={()=>console.log(item)}  />
+                }
+              />
             </Screen>
          </Modal>
     </>

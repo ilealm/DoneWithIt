@@ -17,13 +17,20 @@ import ListingScreens from './app/screens/ListingScreens';
 import AppTextInput from './app/components/AppTextInput';
 import AppPicker from './app/components/AppPicker';
 
+// label: displayed to the user,  value: will be used under the hood
+const categories = [
+      { label: "Furniture", value: 1},
+      { label: "Clothing", value: 2},
+      { label: "Cameras", value: 3},
+]
+
 export default function App() {  
       const [isNew, setIsNew] = useState(false)
       
   return (  
       <Screen>
-            <AppPicker icon="apps" placeholder="Category" />
-            {/* <AppTextInput icon="email" placeholder="email" /> */}
+            <AppPicker items={categories} icon="apps" placeholder="Category" />
+            <AppTextInput icon="email" placeholder="email" />
 
       </Screen>
   );
