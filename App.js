@@ -23,7 +23,7 @@ export default function App() {
   return (  
       <Screen>
             <AppPicker icon="apps" placeholder="Category" />
-            <AppTextInput icon="email" placeholder="email" />
+            {/* <AppTextInput icon="email" placeholder="email" /> */}
 
       </Screen>
   );

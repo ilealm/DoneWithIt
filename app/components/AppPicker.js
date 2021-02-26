@@ -1,10 +1,11 @@
 /**
  * Because Picker is depracated, I'm creatrig my own component that behaves the same
  */
-import React from 'react';
-import { View, StyleSheet  } from 'react-native';
+import React, {useState} from 'react';
+import { View, StyleSheet, TouchableWithoutFeedback, Modal, Button  } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
+import Screen from './Screen'
 import defaultStyles from '../config/styles';
 import AppText from './AppText';
 
@@ -15,21 +16,36 @@ import AppText from './AppText';
 // <Modal a={this.props.a} b={this.props.b} title='Modal heading' animation={false}>
 
 function AppPicker({ icon, placeholder,  ...otherProps }) {
+  const [modalVisible, setModalVisible] = useState(false)
   return (
-    <View style={styles.container}>
-      {/* Render this ONLY if icon is defined */}
-      {icon && <MaterialCommunityIcons 
-        name={icon} 
-        size={20} 
-        color={defaultStyles.colors.medium} 
-        style={styles.icon}  /> }
-      {/* and here I will apply whatever pros I have sent */}
-     <AppText style={styles.text}> {placeholder} </AppText>
-     <MaterialCommunityIcons 
-        name= "chevron-down" 
-        size={20} 
-        color={defaultStyles.colors.medium}   />
-    </View>
+    // I need to implement a fragment BC I'm returning more than 1 component. 
+    // I can just have an <> instead of <React.Fragment>
+    <> 
+      {/* I need to wrap everything with touchable so I can simulate the drop */}
+      <TouchableWithoutFeedback onPress={() => setModalVisible(true)} >
+
+        <View style={styles.container}>
+          {/* Render this ONLY if icon is defined */}
+          {icon && <MaterialCommunityIcons 
+            name={icon} 
+            size={20} 
+            color={defaultStyles.colors.medium} 
+            style={styles.icon}  /> }
+          {/* and here I will apply whatever pros I have sent */}
+        <AppText style={styles.text}> {placeholder} </AppText>
+        <MaterialCommunityIcons 
+            name= "chevron-down" 
+            size={20} 
+            color={defaultStyles.colors.medium}   />
+        </View>
+      </TouchableWithoutFeedback>
+      <Modal visible={modalVisible} animationType="slide">
+            {/* Adding screen so the componet doesn't hide behind the iOS nudge */}
+            <Screen>
+              <Button title="Close" onPress={() => setModalVisible(false)} />
+            </Screen>
+         </Modal>
+    </>
   );
 }
 
