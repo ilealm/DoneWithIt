@@ -15,16 +15,28 @@ import ListItem from './app/components/ListItem';
 import AccountScreen from './app/screens/AccountScreen';
 import ListingScreens from './app/screens/ListingScreens';
 import AppTextInput from './app/components/AppTextInput';
+import AppPicker from './app/components/AppPicker';
+
+// label: displayed to the user,  value: will be used under the hood
+const categories = [
+      { label: "Furniture", value: 1},
+      { label: "Clothing", value: 2},
+      { label: "Cameras", value: 3},
+]
 
 export default function App() {  
-      const [isNew, setIsNew] = useState(false)
+      const [category, setCategory] = useState(categories[0])
       
   return (  
       <Screen>
-            <Switch 
-                  value={ isNew }
-                  onValueChange = { newValue => setIsNew(newValue) }
-            />
+            <AppPicker 
+                  selectedItem= {category}
+                  onSelectedItem={item => setCategory(item)}
+                  items={categories} 
+                  icon="apps" 
+                  placeholder="Category" />
+            <AppTextInput icon="email" placeholder="email" />
+
       </Screen>
   );
 }
