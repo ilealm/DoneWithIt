@@ -17,7 +17,7 @@ import PickerItem from './PickerItem'
 // would be the same as
 // <Modal a={this.props.a} b={this.props.b} title='Modal heading' animation={false}>
 
-function AppPicker({ icon, items, placeholder  }) {
+function AppPicker({ icon, items, onSelectedItem, placeholder, selectedItem  }) {
   const [modalVisible, setModalVisible] = useState(false)
   return (
     // I need to implement a fragment BC I'm returning more than 1 component. 
@@ -34,7 +34,9 @@ function AppPicker({ icon, items, placeholder  }) {
             color={defaultStyles.colors.medium} 
             style={styles.icon}  /> }
           {/* and here I will apply whatever pros I have sent */}
-        <AppText style={styles.text}> {placeholder} </AppText>
+        <AppText style={styles.text}> 
+          { selectedItem ? selectedItem.label : placeholder } 
+        </AppText>
         <MaterialCommunityIcons 
             name= "chevron-down" 
             size={20} 
@@ -53,7 +55,11 @@ function AppPicker({ icon, items, placeholder  }) {
                 renderItem={({item}) => 
                   <PickerItem 
                     label={item.label} 
-                    onPress={()=>console.log(item)}  />
+                    onPress={()=> {
+                      setModalVisible(false);
+                      onSelectedItem(item)
+                    }
+                    }  />
                 }
               />
             </Screen>
