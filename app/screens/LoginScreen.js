@@ -3,11 +3,9 @@ import { Image, StyleSheet } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import AppButton from '../components/AppButton';
-import AppTextInput from '../components/AppTextInput';
-import ErrorMessage from '../components/ErrorMessage';
 import Screen from '../components/Screen';
 import AppFormField from '../components/AppFormField';
+import SubmitButton from '../components/SubmitButton';
 
 
 // VALIDATION SQUEMA FOR THE FORM
@@ -39,46 +37,31 @@ function LoginScreen(props) {
         This fun should return an JS expresion, is there are multiple lines add ()
         errors are all the errors on the form
       */}
-       
-        { ( {handleChange , handleSubmit, errors, setFieldTouched, touched } ) =>  (  // I'm using () BC I'm going to use multiple lines
-          // BC I have multiple components in my form, I need to wrap them inside <>
-          // Here will be the form component
-          // errors, touched etc are Formik props
+       {/* because I added SubmitButton now I don't need all this prosp in the objs */}
+        {/* { ( {handleChange , handleSubmit, errors, setFieldTouched, touched } ) =>  (  // I'm using () BC I'm going to use multiple lines */}
+        { ( ) =>  (  // I'm using () BC I'm going to use multiple lines
           <> 
             <AppFormField
               autoCapitalize="none"  // BC I don't want the first letter capitalized
               autoCorrect={false} 
               icon="email"
               keyboardType="email-address"
-              name="email"  // every AppFormField should have a name, else error
-              // I want to display the error only when the user is done typing, so on OnBlur I need t
-              // onBlur = set to fun {() => }
-              // onBlur={() => setFieldTouched("email") }  // will marrk this field as touched on blur              
-              // onChangeText={handleChange("email")}  // is the same I declared on initialValues
+              name="email"  // every AppFormField should have a name, else error             
               placeholder="Email" 
               textContentType="emailAddress" //will autofill the address from the cache. only works in iOS
             />
-            {/* I want to render this error message ONLY if the field has been touched (onBu=lur) AND has an error */}
-            {/* <ErrorMessage error={errors.email} visible={touched.email} /> */}
-
 
             <AppFormField 
               autoCapitalize="none"
               autoCorrect={false}
               icon="lock"
               name="password"  // every AppFormField should have a name, else error
-              // onBlur={() => setFieldTouched("password") }  // will marrk this field as touched on blur              
-              // onChangeText={handleChange("password")}              
               placeholder="Password"
               secureTextEntry
               textContentType="password" //autofil from keychain, just iOS
             />
-            {/* <ErrorMessage error={errors.password} visible={touched.password} /> */}
 
-            <AppButton 
-              title="Login"
-              onPress={handleSubmit}  //this will case the form to be submitted
-            />
+            <SubmitButton title='Login' />
           </>
         ) }
       </Formik>

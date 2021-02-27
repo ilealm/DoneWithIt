@@ -2,9 +2,8 @@
  * Reusable form component.
 * It contains an <AppTexInput> and a <ErrorMessage>
  */
-
- import React from 'react';
- import { useFormikContext } from 'formik'; // this will pass down: {handleChange , handleSubmit, errors, setFieldTouched, touched } 
+import React from 'react';
+import { useFormikContext } from 'formik'; // this will pass down: {handleChange , handleSubmit, errors, setFieldTouched, touched } 
  
 import AppTextInput from './AppTextInput';
 import ErrorMessage from './ErrorMessage';
