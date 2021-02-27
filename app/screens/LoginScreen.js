@@ -7,6 +7,7 @@ import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
 import ErrorMessage from '../components/ErrorMessage';
 import Screen from '../components/Screen';
+import AppFormField from '../components/AppFormField';
 
 
 // VALIDATION SQUEMA FOR THE FORM
@@ -44,33 +45,35 @@ function LoginScreen(props) {
           // Here will be the form component
           // errors, touched etc are Formik props
           <> 
-            <AppTextInput
+            <AppFormField
               autoCapitalize="none"  // BC I don't want the first letter capitalized
               autoCorrect={false} 
               icon="email"
               keyboardType="email-address"
+              name="email"  // every AppFormField should have a name, else error
               // I want to display the error only when the user is done typing, so on OnBlur I need t
               // onBlur = set to fun {() => }
-              onBlur={() => setFieldTouched("email") }  // will marrk this field as touched on blur              
-              onChangeText={handleChange("email")}  // is the same I declared on initialValues
+              // onBlur={() => setFieldTouched("email") }  // will marrk this field as touched on blur              
+              // onChangeText={handleChange("email")}  // is the same I declared on initialValues
               placeholder="Email" 
               textContentType="emailAddress" //will autofill the address from the cache. only works in iOS
             />
             {/* I want to render this error message ONLY if the field has been touched (onBu=lur) AND has an error */}
-            <ErrorMessage error={errors.email} visible={touched.email} />
+            {/* <ErrorMessage error={errors.email} visible={touched.email} /> */}
 
 
-            <AppTextInput 
+            <AppFormField 
               autoCapitalize="none"
               autoCorrect={false}
               icon="lock"
-              onBlur={() => setFieldTouched("password") }  // will marrk this field as touched on blur              
-              onChangeText={handleChange("password")}              
-              secureTextEntry
+              name="password"  // every AppFormField should have a name, else error
+              // onBlur={() => setFieldTouched("password") }  // will marrk this field as touched on blur              
+              // onChangeText={handleChange("password")}              
               placeholder="Password"
+              secureTextEntry
               textContentType="password" //autofil from keychain, just iOS
             />
-            <ErrorMessage error={errors.password} visible={touched.password} />
+            {/* <ErrorMessage error={errors.password} visible={touched.password} /> */}
 
             <AppButton 
               title="Login"
