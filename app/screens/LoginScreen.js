@@ -1,11 +1,10 @@
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
-import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import Screen from '../components/Screen';
-import AppFormField from '../components/AppFormField';
-import SubmitButton from '../components/SubmitButton';
+// I can do this BS I have a index.js
+import { AppForm, AppFormField, SubmitButton } from '../components/forms';
 
 
 // VALIDATION SQUEMA FOR THE FORM
@@ -23,25 +22,13 @@ function LoginScreen(props) {
       <Image style={styles.logo}
        source={require("../assets/logo-red.png")} />
 
-      <Formik
-        initialValues={ { email:'', password:'' } }  // set to an obj    // onSubmit takes a func to call when the form has been submitted. 
+      <AppForm
         // the funcion takes an obj that represents the values on the form
+        initialValues={ { email:'', password:'' } }  
         onSubmit={(values) => console.log(values)}
-        validationSchema= {validationSchema}  // 
+        validationSchema= {validationSchema}   
       >
-
-      {/* 
-        - here I have {} BC I need to pass a function. {() => } , this is why I need to use {}
-        - This fun. have an argument (arg) =>,  
-        - ({ handleChange , hanldeSubmit  }) => that I can destructor to just pick some properties (they are a bunch.)
-        This fun should return an JS expresion, is there are multiple lines add ()
-        errors are all the errors on the form
-      */}
-       {/* because I added SubmitButton now I don't need all this prosp in the objs */}
-        {/* { ( {handleChange , handleSubmit, errors, setFieldTouched, touched } ) =>  (  // I'm using () BC I'm going to use multiple lines */}
-        { ( ) =>  (  // I'm using () BC I'm going to use multiple lines
-          <> 
-            <AppFormField
+        <AppFormField
               autoCapitalize="none"  // BC I don't want the first letter capitalized
               autoCorrect={false} 
               icon="email"
@@ -49,22 +36,19 @@ function LoginScreen(props) {
               name="email"  // every AppFormField should have a name, else error             
               placeholder="Email" 
               textContentType="emailAddress" //will autofill the address from the cache. only works in iOS
-            />
+        />
+        <AppFormField 
+          autoCapitalize="none"
+          autoCorrect={false}
+          icon="lock"
+          name="password"  // every AppFormField should have a name, else error
+          placeholder="Password"
+          secureTextEntry
+          textContentType="password" //autofil from keychain, just iOS
+        />
 
-            <AppFormField 
-              autoCapitalize="none"
-              autoCorrect={false}
-              icon="lock"
-              name="password"  // every AppFormField should have a name, else error
-              placeholder="Password"
-              secureTextEntry
-              textContentType="password" //autofil from keychain, just iOS
-            />
-
-            <SubmitButton title='Login' />
-          </>
-        ) }
-      </Formik>
+        <SubmitButton title='Login' />
+      </AppForm>
     </Screen>
   );
 }
