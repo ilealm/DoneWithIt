@@ -16,7 +16,7 @@ function RegisterScreen(props) {
   return (
     <Screen style={styles.container}>
       <AppForm
-        initialValues={{ name: "", email: "", password: "" }}
+        initialValues={{ name: "", email: "", password: "" }}  // if I don't assing a initial value, the validation schema won't work.
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
