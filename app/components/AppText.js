@@ -9,9 +9,11 @@ import defaultStyles from '../config/styles';
 
 // {/* also I could use destructuring for prop argument and access the child */}
 // I need to pass style prop so I can apply it here.
-function AppText({children, style}){
+// I need otherProps to pass props like numberOfLines
+function AppText({children, style, ...otherProps}){
   return(
-    <Text style={[defaultStyles.text, style]}>
+    // here {...otherProps} will truncate the lines to 1, if especified
+    <Text style={[defaultStyles.text, style,]}  {...otherProps}   >
       {children} 
     </Text>
   );

@@ -10,8 +10,10 @@ import ListItemDeleteAction from '../components/lists/ListItemDeleteAction';
 const initialMessages= [
   {
     id: 1,
-    title: 'T1',
-    description:"D1",
+    title: 'T1 dsfjlksdjfkjfkjkfjjfkjfkjkfj kdfjkldj j kdfjkldj kdjf lkdfklj skdfh llksdf dsfjlksdjfkjfkjkfj kdfjkldj kdjf lkdfklj skdfh llksdf dsfjlksdjfkjfkjkfj kdfjkldj kdjf lkdfklj skdfh llksdf dsfjlksdjfkjfkjkfj kdfjkldj kdjf lkdfklj skdfh llksdf dsfjlksdjfkjfkjkfj kdfjkldj kdjf lkdfklj skdfh llksdf dsfjlksdjfkjfkjkfj kdfjkldj kdjf lkdfklj skdfh llksdf',
+    // title: 'T1',
+    // description:"D1",
+    description:"D1 dsfjkdfjkldj kdjf lkdfklj skdfh llksdf lksdjfkjfkjkfj kdfjkldj kdjf lkdfklj skdfh llksdf kdfjkldj kdjf lkdfklj skdfh llksdfkdfjkldj kdjf lkdfklj skdfh llksdf dsfjlksdjfkjfkjkfj kdfjkldj kdjf lkdfklj skdfh llksdf",
     image: require('../assets/dow.jpg')  // use requere to load an image statically
   },
   {
@@ -61,6 +63,7 @@ function MessagesScreen(props) {
             title={ item.title }
             subTitle = {item.description}
             image = {item.image}
+            showChevron = {true}  //i put this
             onPress={() => console.log('Message selected. ToDo send to another screen')}
             // renderRightActions={ ListItemDeleteAction } // with this syntax I can't pass the prop onPress, so I need to change to a function
             renderRightActions={ () => 
