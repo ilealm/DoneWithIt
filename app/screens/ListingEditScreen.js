@@ -2,6 +2,8 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 
+
+// IF I WANT TO USE THIS APPROACH, I HAVE TO DO THE SAME IN ALL PAGES
 // import {
 //   AppForm as Form,
 //   AppFormField as FormField,
@@ -10,9 +12,13 @@ import * as Yup from "yup";
 // } from "../components/forms";
 
 
+// for some reason, if I add AppFormPicker in this way, I have errors loading
+// import { AppForm, AppFormField,  SubmitButton, AppFormPicker } from "../components/forms";
+// so I need to load in this way
 import { AppForm, AppFormField,  SubmitButton } from "../components/forms";
+import AppFormPicker from '../components/forms/AppFormPicker';
+
 import Screen from "../components/Screen";
-import AppFormPicker from '../components/forms/AppFormPicker'
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
@@ -56,7 +62,7 @@ function ListingEditScreen() {
           maxLength={255}
           multiline
           name="description"
-          numberOfLines={3}  // onky works for android
+          numberOfLines={3}  // only works for android
           placeholder="Description"
         /> 
         <SubmitButton title="Post" />
