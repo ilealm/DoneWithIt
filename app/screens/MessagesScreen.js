@@ -10,14 +10,14 @@ import ListItemDeleteAction from '../components/lists/ListItemDeleteAction';
 const initialMessages= [
   {
     id: 1,
-    title: 'T1',
-    description:"D1",
+    title: 'ISO red jacket',
+    description:"In color red, for women, midium size, home cleaning onlu.",
     image: require('../assets/dow.jpg')  // use requere to load an image statically
   },
   {
     id: 2,
-    title: 'T2',
-    description:"D2",
+    title: 'Selling CanCun tickets',
+    description:"I have 4 tickets to CanCun than I need to change. PM for details.",
     image: require('../assets/dow.jpg')  // use requere to load an image statically
   }
 ]
