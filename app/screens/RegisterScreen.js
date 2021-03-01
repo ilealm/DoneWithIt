@@ -6,8 +6,9 @@ import Screen from '../components/Screen';
 import { AppForm, AppFormField, SubmitButton } from '../components/forms';
 
 const validationSchema = Yup.object().shape({
+  name: Yup.string().required().label("Name"),
   email: Yup.string().required().email().label("Email"),
-  password: Yup.string().required().email().label("Password"),
+  password: Yup.string().required().min(4).label("Password"),
 });
 
 
@@ -16,8 +17,17 @@ function RegisterScreen(props) {
     <Screen style={styles.container}>
       <AppForm
         initialValues={{ email:'' }}
+        onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
+        {/* USER */}
+        <AppFormField
+          autoCorrect={false} 
+          icon="account"
+          name="name"  // every AppFormField should have a name, else error             
+          placeholder="Name" 
+        />
+
         {/* EMAIL */}
         <AppFormField
           autoCapitalize="none"  // BC I don't want the first letter capitalized
@@ -29,12 +39,11 @@ function RegisterScreen(props) {
           textContentType="emailAddress" //will autofill the address from the cache. only works in iOS
         />
 
-         {/* PASSWORD */}
-         <AppFormField
+        {/* PASSWORD */}
+        <AppFormField
           autoCapitalize="none"  // BC I don't want the first letter capitalized
           autoCorrect={false} 
           icon="lock"
-          keyboardType="email-address"
           name="password"  // every AppFormField should have a name, else error             
           placeholder="Password" 
           textContentType="password" //will autofill the address from the cache. only works in iOS
@@ -44,9 +53,7 @@ function RegisterScreen(props) {
         <SubmitButton title="Register" />
 
       </AppForm>
-
     </Screen>
-
   );
 }
 
