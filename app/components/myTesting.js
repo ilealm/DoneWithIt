@@ -1,16 +1,24 @@
-import React from "react";
-import { Formik } from "formik";
+export const PreviousStateGood = () => {
+  const [isDisabled, setIsDisabled] = useState(false)
 
-function AppForm({ initialValues, onSubmit, validationSchema, children }) {
+  // INSTEAD OF 
+  // const toggleButton = () => setIsDisabled(!isDisabled)
+  // DO THE FOLOWING
+  const toggleButton = () => setIsDisabled(isDisabled => !isDisabled)
+
+  const toggleButton2Times = () => {
+    for (let i = 0; i < 2; i++) {
+      toggleButton()
+    }
+  }
+
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={onSubmit}
-      validationSchema={validationSchema}
-    >
-      {() => <>{children}</>}
-    </Formik>
-  );
+    <div>
+      <button disabled={isDisabled}>
+        I'm {isDisabled ? 'disabled' : 'enabled'}
+      </button>
+      <button onClick={toggleButton}>Toggle button state</button>
+      <button onClick={toggleButton2Times}>Toggle button state 2 times</button>
+    </div>
+  )
 }
-
-export default AppForm;
