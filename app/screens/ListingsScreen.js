@@ -24,7 +24,7 @@ function LoginScreen(props) {
 
       <AppForm
         // the funcion takes an obj that represents the values on the form
-        initialValues={ { email:'', password:'' } }  
+        initialValues={ { email:'', password:'' } }   // if I don't assing a initial value, the validation schema won't work.
         onSubmit={(values) => console.log(values)}
         validationSchema= {validationSchema}   
       >

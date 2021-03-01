@@ -33,14 +33,21 @@ function AppPicker({ icon, items, onSelectedItem, placeholder, selectedItem  }) 
             size={20} 
             color={defaultStyles.colors.medium} 
             style={styles.icon}  /> }
+      
           {/* and here I will apply whatever pros I have sent */}
-        <AppText style={styles.text}> 
-          { selectedItem ? selectedItem.label : placeholder } 
-        </AppText>
-        <MaterialCommunityIcons 
-            name= "chevron-down" 
-            size={20} 
-            color={defaultStyles.colors.medium}   />
+          {/* displays the placeholder in midium gray and the selected item in darkgray */}
+          { selectedItem 
+            ?  
+              (<AppText style={styles.text}> { selectedItem.label } </AppText> )
+            :
+              (<AppText style={styles.placeholder}> { placeholder } </AppText>)
+            }  
+
+            {/* Drop down icon \/  */}
+           <MaterialCommunityIcons 
+              name= "chevron-down" 
+              size={20} 
+              color={defaultStyles.colors.medium}   />
         </View>
       </TouchableWithoutFeedback>
       <Modal visible={modalVisible} animationType="slide">
@@ -79,6 +86,10 @@ const styles = StyleSheet.create({
   },
   icon:{
     marginRight:10,
+  },
+  placeholder:{
+    color: defaultStyles.colors.medium,
+    flex: 1, // so the placeholder grows and takes all the place   
   },
   text:{
     flex: 1, // this is what  moves the down icon (chevron) to the right
