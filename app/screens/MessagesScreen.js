@@ -10,10 +10,8 @@ import ListItemDeleteAction from '../components/lists/ListItemDeleteAction';
 const initialMessages= [
   {
     id: 1,
-    title: 'T1 dsfjlksdjfkjfkjkfjjfkjfkjkfj kdfjkldj j kdfjkldj kdjf lkdfklj skdfh llksdf dsfjlksdjfkjfkjkfj kdfjkldj kdjf lkdfklj skdfh llksdf dsfjlksdjfkjfkjkfj kdfjkldj kdjf lkdfklj skdfh llksdf dsfjlksdjfkjfkjkfj kdfjkldj kdjf lkdfklj skdfh llksdf dsfjlksdjfkjfkjkfj kdfjkldj kdjf lkdfklj skdfh llksdf dsfjlksdjfkjfkjkfj kdfjkldj kdjf lkdfklj skdfh llksdf',
-    // title: 'T1',
-    // description:"D1",
-    description:"D1 dsfjkdfjkldj kdjf lkdfklj skdfh llksdf lksdjfkjfkjkfj kdfjkldj kdjf lkdfklj skdfh llksdf kdfjkldj kdjf lkdfklj skdfh llksdfkdfjkldj kdjf lkdfklj skdfh llksdf dsfjlksdjfkjfkjkfj kdfjkldj kdjf lkdfklj skdfh llksdf",
+    title: 'T1',
+    description:"D1",
     image: require('../assets/dow.jpg')  // use requere to load an image statically
   },
   {

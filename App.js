@@ -23,7 +23,8 @@ import ListingEditScreen from './app/screens/ListingEditScreen';
 
 export default function App() {  
   return (  
-      <MessagesScreen /> 
+      // <MessagesScreen /> 
+      <ListingScreens />
       // <RegisterScreen />
       // <ListingEditScreen/>
             
