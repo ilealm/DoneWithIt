@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, StyleSheet, Image, TouchableHighlight } from 'react-native'
-import AppText from './AppText';
+import AppText from '../AppText';
 // for using this, I need to install the UI library React Native Gesture Handler
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
-import colors from '../config/colors';
+import colors from '../../config/colors';
 
 // added onPress to let the TouchableHighLight behaves based on its consumer
 // IconComponent is a real component passed as props

@@ -6,7 +6,7 @@
  import React from 'react';
  import { StyleSheet, View } from 'react-native'
 
- import colors from '../config/colors';
+ import colors from '../../config/colors';
 
 //  I don't need the props, so I can remove it
 //  function ListItemSeparator(props) {

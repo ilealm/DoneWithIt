@@ -11,7 +11,7 @@ import ViewImageScreen from './app/screens/ViewImageScreen';
 import MessagesScreen from './app/screens/MessagesScreen';
 import Screen from './app/components/Screen';
 import Icon from './app/components/Icon';
-import ListItem from './app/components/ListItem';
+import ListItem from './app/components/lists/ListItem';
 import AccountScreen from './app/screens/AccountScreen';
 import ListingScreens from './app/screens/ListingScreens';
 import AppTextInput from './app/components/AppTextInput';
@@ -23,9 +23,9 @@ import ListingEditScreen from './app/screens/ListingEditScreen';
 
 export default function App() {  
   return (  
-      // <LoginScreen /> 
+      <ListingScreens /> 
       // <RegisterScreen />
-      <ListingEditScreen/>
+      // <ListingEditScreen/>
             
 
 );
