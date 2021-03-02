@@ -23,7 +23,7 @@ function CategoryPickerItem({
 const styles = StyleSheet.create({
   container:{    
     // in this case the def. axis is vertical
-    paddingHorizontal: 30,
+    paddingHorizontal: 20,
     paddingVertical: 15,
     alignItems: "center", // to aling the labels with the icons
     width: '33%', // to wrap long AppText in the same column 
