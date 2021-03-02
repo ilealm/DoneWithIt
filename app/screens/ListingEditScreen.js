@@ -52,11 +52,14 @@ function ListingEditScreen() {
           maxLength={8}  //10000.00 => 8 chrs
           name="price"
           placeholder="Price"
+          width= {120}
         />
         <AppFormPicker 
           items={categories} 
           name="category" 
-          placeholder="Category" />
+          placeholder="Category"
+          width= '50%'
+        />
 
         <AppFormField
           maxLength={255}

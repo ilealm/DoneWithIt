@@ -17,7 +17,14 @@ import PickerItem from './PickerItem'
 // would be the same as
 // <Modal a={this.props.a} b={this.props.b} title='Modal heading' animation={false}>
 
-function AppPicker({ icon, items, onSelectedItem, placeholder, selectedItem  }) {
+function AppPicker({ 
+    icon, 
+    items, 
+    onSelectedItem, 
+    placeholder, 
+    selectedItem, 
+    width='100%',
+  }) {
   const [modalVisible, setModalVisible] = useState(false)
   return (
     // I need to implement a fragment BC I'm returning more than 1 component. 
@@ -26,7 +33,7 @@ function AppPicker({ icon, items, onSelectedItem, placeholder, selectedItem  }) 
       {/* I need to wrap everything with touchable so I can simulate the drop */}
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)} >
 
-        <View style={styles.container}>
+        <View style={[styles.container, {width}]}>
           {/* Render this ONLY if icon is defined */}
           {icon && <MaterialCommunityIcons 
             name={icon} 
@@ -80,7 +87,7 @@ const styles = StyleSheet.create({
     backgroundColor: defaultStyles.colors.light,
     borderRadius: 25,
     flexDirection: "row", // left to right, so I can have the icon and text in the same row. (horiz)
-    width:'100%',
+    // width:'100%',  // remove it BC now I'm sending the width as props
     padding: 15,
     marginVertical: 10,   // to separate multiple textInputs in the same screen
   },
