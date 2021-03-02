@@ -17,7 +17,18 @@ import PickerItem from './PickerItem'
 // would be the same as
 // <Modal a={this.props.a} b={this.props.b} title='Modal heading' animation={false}>
 
-function AppPicker({ icon, items, onSelectedItem, placeholder, selectedItem  }) {
+function AppPicker({ 
+    icon, 
+    items, 
+    numberOfColumns= 1,  //adding a default value
+    onSelectedItem, 
+    //Passing a component to know to render a flat list o a list with colors. 
+    //By default, send PickerItem component
+    PickerItemComponent = PickerItem, 
+    placeholder, 
+    selectedItem, 
+    width='100%',
+  }) {
   const [modalVisible, setModalVisible] = useState(false)
   return (
     // I need to implement a fragment BC I'm returning more than 1 component. 
@@ -26,7 +37,7 @@ function AppPicker({ icon, items, onSelectedItem, placeholder, selectedItem  }) 
       {/* I need to wrap everything with touchable so I can simulate the drop */}
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)} >
 
-        <View style={styles.container}>
+        <View style={[styles.container, {width}]}>
           {/* Render this ONLY if icon is defined */}
           {icon && <MaterialCommunityIcons 
             name={icon} 
@@ -58,9 +69,15 @@ function AppPicker({ icon, items, onSelectedItem, placeholder, selectedItem  }) 
               <FlatList 
                 data={items}
                 keyExtractor={item => item.value.toString()}  // is expecting a function, I CAN'T use {items.value}
+                // numColumns={3} if I want this hardcode, this is the way
+                numColumns={numberOfColumns}  // to have it dinamically
                 // renderItems expects a func. that I'm desctucturing right away
                 renderItem={({item}) => 
-                  <PickerItem 
+                  // <PickerItem 
+                  <PickerItemComponent
+                    // only CategoryPickerComponent needs backgroundColor and icon, so I will pass that in the
+                    // item (object containing all the info). Is the item I'm rendering
+                    item={item} // is a obj w a bunch of properties
                     label={item.label} 
                     onPress={()=> {
                       setModalVisible(false);
@@ -80,7 +97,7 @@ const styles = StyleSheet.create({
     backgroundColor: defaultStyles.colors.light,
     borderRadius: 25,
     flexDirection: "row", // left to right, so I can have the icon and text in the same row. (horiz)
-    width:'100%',
+    // width:'100%',  // remove it BC now I'm sending the width as props
     padding: 15,
     marginVertical: 10,   // to separate multiple textInputs in the same screen
   },

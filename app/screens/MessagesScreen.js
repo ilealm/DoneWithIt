@@ -3,21 +3,21 @@ import { FlatList, StyleSheet, View, } from 'react-native';
 
 
 import Screen from '../components/Screen';
-import ListItem from '../components/ListItem';
-import ListItemSeparator from '../components/ListItemSeparator';
-import ListItemDeleteAction from '../components/ListItemDeleteAction';
+import ListItem from '../components/lists/ListItem';
+import ListItemSeparator from '../components/lists/ListItemSeparator';
+import ListItemDeleteAction from '../components/lists/ListItemDeleteAction';
 
 const initialMessages= [
   {
     id: 1,
-    title: 'T1',
-    description:"D1",
+    title: 'ISO red jacket',
+    description:"In color red, for women, midium size, home cleaning onlu.",
     image: require('../assets/dow.jpg')  // use requere to load an image statically
   },
   {
     id: 2,
-    title: 'T2',
-    description:"D2",
+    title: 'Selling CanCun tickets',
+    description:"I have 4 tickets to CanCun than I need to change. PM for details.",
     image: require('../assets/dow.jpg')  // use requere to load an image statically
   }
 ]
@@ -61,6 +61,7 @@ function MessagesScreen(props) {
             title={ item.title }
             subTitle = {item.description}
             image = {item.image}
+            showChevron = {true}  //i put this
             onPress={() => console.log('Message selected. ToDo send to another screen')}
             // renderRightActions={ ListItemDeleteAction } // with this syntax I can't pass the prop onPress, so I need to change to a function
             renderRightActions={ () => 

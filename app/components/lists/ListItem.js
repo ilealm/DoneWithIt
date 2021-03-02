@@ -1,14 +1,25 @@
 import React from 'react';
 import { View, StyleSheet, Image, TouchableHighlight } from 'react-native'
-import AppText from './AppText';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 // for using this, I need to install the UI library React Native Gesture Handler
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
-import colors from '../config/colors';
+
+import AppText from '../AppText';
+import colors from '../../config/colors';
+// import defaultStyles from '../config/styles';
 
 // added onPress to let the TouchableHighLight behaves based on its consumer
 // IconComponent is a real component passed as props
-function ListItem({title, subTitle, image, IconComponent, onPress, renderRightActions}) {
+function ListItem({
+  title, 
+  subTitle, 
+  image, 
+  IconComponent, 
+  onPress, 
+  renderRightActions,
+  showChevron,
+}) {
   return (
     // this one is for swaping to the left
     <Swipeable
@@ -30,10 +41,24 @@ function ListItem({title, subTitle, image, IconComponent, onPress, renderRightAc
 
               {/* in this container I will lay out vertically */}
               <View style={styles.detailsContainer}>
-                <AppText style={styles.title}>{title}</AppText>
-                {/* add conditional render in case I don't have a subtitle */}
-                { subTitle && <AppText style={styles.subTitle}>{subTitle}</AppText>}
+                <AppText 
+                  style={styles.title} numberOfLines={1}>
+                    {title}
+                </AppText>
+                  {/* add conditional render in case I don't have a subtitle */}
+                  { subTitle && 
+                    <AppText style={styles.subTitle} numberOfLines={2} >
+                      {subTitle}</AppText>}
               </View>
+
+              {/* Display the  right chevron only if indicated */}
+              {showChevron &&  
+                  <MaterialCommunityIcons 
+                    color={colors.medium}
+                    name= "chevron-right" 
+                    size={25}  />   }
+           
+        
           </View>
         </TouchableHighlight>
     </Swipeable>
@@ -42,12 +67,14 @@ function ListItem({title, subTitle, image, IconComponent, onPress, renderRightAc
 
 const styles = StyleSheet.create({
   container:{
+    alignItems:"center", // align the chevron icon to center
     // I need to set the flex direction to row BS I need to lay out this horiz.
     flexDirection: 'row', // row= left to right. The defaul is column (Top to bottom)
     padding: 15,
     backgroundColor: colors.white,  // if I want this component reusable for any solution, I may need to change this color here.
   },
   detailsContainer:{
+    flex:1,
     marginLeft :10,
     justifyContent: 'center',
   },  
@@ -55,8 +82,6 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     borderRadius: 35, // to make the image round
-    // marginRight: 10, 
-    // marginLeft:20, // i will not let this here BC i want to have a reusable component 
   },
   subTitle:{
     color: colors.medium,

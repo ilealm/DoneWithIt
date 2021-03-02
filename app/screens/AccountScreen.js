@@ -2,12 +2,12 @@ import React from 'react';
 import { View, StyleSheet, FlatList } from 'react-native'
 
 import Screen from '../components/Screen';
-import ListItem from '../components/ListItem';
+import ListItem from '../components/lists/ListItem';
 import Icon from '../components/Icon';
 // BE SURE TO IMPORT FlatList from react-Native, not gesture.
 // import { FlatList } from 'react-native-gesture-handler';
 import colors from '../config/colors';
-import ListItemSeparator from '../components/ListItemSeparator';
+import ListItemSeparator from '../components/lists/ListItemSeparator';
 
 
 
