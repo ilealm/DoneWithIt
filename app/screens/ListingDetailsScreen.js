@@ -3,18 +3,18 @@ import React from 'react';
 import { View, StyleSheet, Image } from 'react-native'
 
 
-import AppText from '../components/AppText';
-import ListItem from '../components/lists/ListItem';
 import colors from '../config/colors';
+import ListItem from '../components/lists/ListItem';
+import Text from '../components/Text';
 
 function ListingDetailsScreen(props) {
   return (
     <View>
       <Image  style={styles.image} source={require('../assets/jacket.jpg')} />
       <View style={styles.detailsContainer}>
-        <AppText style={styles.title}>Red jacket for sale </AppText>
+        <Text style={styles.title}>Red jacket for sale </Text>
         {/* here I'm saying price and not subTitle BC this page is not intended to reuse */}
-        <AppText style={styles.price}>$100 </AppText>        
+        <Text style={styles.price}>$100 </Text>        
       </View>
       <View style={styles.userContainer}>
         {/* This component display the seller image, name and listings */}
