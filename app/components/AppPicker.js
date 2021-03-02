@@ -20,6 +20,7 @@ import PickerItem from './PickerItem'
 function AppPicker({ 
     icon, 
     items, 
+    numberOfColumns= 1,  //adding a default value
     onSelectedItem, 
     //Passing a component to know to render a flat list o a list with colors. 
     //By default, send PickerItem component
@@ -68,10 +69,15 @@ function AppPicker({
               <FlatList 
                 data={items}
                 keyExtractor={item => item.value.toString()}  // is expecting a function, I CAN'T use {items.value}
+                // numColumns={3} if I want this hardcode, this is the way
+                numColumns={numberOfColumns}  // to have it dinamically
                 // renderItems expects a func. that I'm desctucturing right away
                 renderItem={({item}) => 
                   // <PickerItem 
                   <PickerItemComponent
+                    // only CategoryPickerComponent needs backgroundColor and icon, so I will pass that in the
+                    // item (object containing all the info). Is the item I'm rendering
+                    item={item} // is a obj w a bunch of properties
                     label={item.label} 
                     onPress={()=> {
                       setModalVisible(false);
