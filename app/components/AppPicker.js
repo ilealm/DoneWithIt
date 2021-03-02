@@ -21,6 +21,9 @@ function AppPicker({
     icon, 
     items, 
     onSelectedItem, 
+    //Passing a component to know to render a flat list o a list with colors. 
+    //By default, send PickerItem component
+    PickerItemComponent = PickerItem, 
     placeholder, 
     selectedItem, 
     width='100%',
@@ -67,7 +70,8 @@ function AppPicker({
                 keyExtractor={item => item.value.toString()}  // is expecting a function, I CAN'T use {items.value}
                 // renderItems expects a func. that I'm desctucturing right away
                 renderItem={({item}) => 
-                  <PickerItem 
+                  // <PickerItem 
+                  <PickerItemComponent
                     label={item.label} 
                     onPress={()=> {
                       setModalVisible(false);

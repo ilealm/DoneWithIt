@@ -17,6 +17,7 @@ import * as Yup from "yup";
 // so I need to load in this way
 import { AppForm, AppFormField,  SubmitButton } from "../components/forms";
 import AppFormPicker from '../components/forms/AppFormPicker';
+import CategoryPickerItem from "../components/lists/CategoryPickerItem";
 
 import Screen from "../components/Screen";
 
@@ -57,6 +58,7 @@ function ListingEditScreen() {
         <AppFormPicker 
           items={categories} 
           name="category" 
+          PickerItemComponent = {CategoryPickerItem}
           placeholder="Category"
           width= '50%'
         />
