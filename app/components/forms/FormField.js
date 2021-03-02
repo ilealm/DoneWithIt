@@ -5,7 +5,7 @@
 import React from 'react';
 import { useFormikContext } from 'formik'; // this will pass down: {handleChange , handleSubmit, errors, setFieldTouched, touched } 
  
-import AppTextInput from '../AppTextInput';
+import TextInput from '../TextInput';
 import ErrorMessage from './ErrorMessage';
 
 
@@ -15,7 +15,7 @@ function AppFormField({ name, width, ...otherProps }) {
 
    return (
      <>
-      <AppTextInput
+      <TextInput
           // I want to display the error only when the user is done typing, so on OnBlur I need t
           // onBlur = set to fun {() => }
           onBlur={() => setFieldTouched(name) }  // will marrk this field as touched on blur              

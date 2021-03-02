@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import * as Yup from 'yup';
 
 import Screen from '../components/Screen';
-import { AppForm, AppFormField, SubmitButton } from '../components/forms';
+import { Form, FormField, SubmitButton } from '../components/forms';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required().label("Name"),
@@ -15,36 +15,36 @@ const validationSchema = Yup.object().shape({
 function RegisterScreen(props) {
   return (
     <Screen style={styles.container}>
-      <AppForm
+      <Form
         initialValues={{ name: "", email: "", password: "" }}  // if I don't assing a initial value, the validation schema won't work.
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
         {/* USER */}
-        <AppFormField
+        <FormField
           autoCorrect={false} 
           icon="account"
-          name="name"  // every AppFormField should have a name, else error             
+          name="name"  // every FormField should have a name, else error             
           placeholder="Name" 
         />
 
         {/* EMAIL */}
-        <AppFormField
+        <FormField
           autoCapitalize="none"  // BC I don't want the first letter capitalized
           autoCorrect={false} 
           icon="email"
           keyboardType="email-address"
-          name="email"  // every AppFormField should have a name, else error             
+          name="email"  // every FormField should have a name, else error             
           placeholder="Email" 
           textContentType="emailAddress" //will autofill the address from the cache. only works in iOS
         />
 
         {/* PASSWORD */}
-        <AppFormField
+        <FormField
           autoCapitalize="none"  // BC I don't want the first letter capitalized
           autoCorrect={false} 
           icon="lock"
-          name="password"  // every AppFormField should have a name, else error             
+          name="password"  // every FormField should have a name, else error             
           placeholder="Password" 
           textContentType="password" //will autofill the address from the cache. only works in iOS
         />
@@ -52,7 +52,7 @@ function RegisterScreen(props) {
         {/* BUTTONS */}
         <SubmitButton title="Register" />
 
-      </AppForm>
+      </Form>
     </Screen>
   );
 }

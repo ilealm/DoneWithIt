@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import AppText from '../AppText';
-import Icon from '../Icon';
+
+import Icon from './Icon';
+import Text from './Text';
 
 
 function CategoryPickerItem({ 
@@ -14,7 +15,7 @@ function CategoryPickerItem({
         name={item.icon} 
         size={80}
       />
-      <AppText style={styles.label} > {item.label} </AppText>
+      <Text style={styles.label} > {item.label} </Text>
     </View>
 
   ) ;  
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 15,
     alignItems: "center", // to aling the labels with the icons
-    width: '33%', // to wrap long AppText in the same column 
+    width: '33%', // to wrap long Text in the same column 
   },
   label:{
     marginBottom: 15,

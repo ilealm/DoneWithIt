@@ -2,13 +2,19 @@
  * Because Picker is depracated, I'm creatrig my own component that behaves the same
  */
 import React, {useState} from 'react';
-import { View, StyleSheet, TouchableWithoutFeedback, Modal, Button, FlatList  } from 'react-native';
+import { View, 
+  StyleSheet, 
+  TouchableWithoutFeedback, 
+  Modal, 
+  Button, 
+  FlatList  } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import Screen from './Screen'
+
+import Text from './Text';
 import defaultStyles from '../config/styles';
-import AppText from './AppText';
-import PickerItem from './PickerItem'
+import PickerItem from './PickerItem';
+import Screen from './Screen';
 
 
 // I can use the rest operator "..." and get the rest of the props and put inside a single object. Whatever those props are
@@ -49,9 +55,9 @@ function AppPicker({
           {/* displays the placeholder in midium gray and the selected item in darkgray */}
           { selectedItem 
             ?  
-              (<AppText style={styles.text}> { selectedItem.label } </AppText> )
+              (<Text style={styles.text}> { selectedItem.label } </Text> )
             :
-              (<AppText style={styles.placeholder}> { placeholder } </AppText>)
+              (<Text style={styles.placeholder}> { placeholder } </Text>)
             }  
 
             {/* Drop down icon \/  */}

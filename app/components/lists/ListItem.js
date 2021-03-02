@@ -5,7 +5,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 
-import AppText from '../AppText';
+import Text from '../Text';
 import colors from '../../config/colors';
 // import defaultStyles from '../config/styles';
 
@@ -41,14 +41,14 @@ function ListItem({
 
               {/* in this container I will lay out vertically */}
               <View style={styles.detailsContainer}>
-                <AppText 
+                <Text 
                   style={styles.title} numberOfLines={1}>
                     {title}
-                </AppText>
+                </Text>
                   {/* add conditional render in case I don't have a subtitle */}
                   { subTitle && 
-                    <AppText style={styles.subTitle} numberOfLines={2} >
-                      {subTitle}</AppText>}
+                    <Text style={styles.subTitle} numberOfLines={2} >
+                      {subTitle}</Text>}
               </View>
 
               {/* Display the  right chevron only if indicated */}

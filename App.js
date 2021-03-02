@@ -1,33 +1,29 @@
 import React, {useState} from 'react';
-import { View, Text, TextInput, Switch } from 'react-native';
+import { View, } from 'react-native';
 
+
+import AccountScreen from './app/screens/AccountScreen';
+import Card from './app/components/Card';
+import Icon from './app/components/Icon';
+import ListingDetailsScreen from './app/screens/ListingDetailsScreen';
+import ListItem from './app/components/lists/ListItem';
+import ListingEditScreen from './app/screens/ListingEditScreen';
+import ListingScreens from './app/screens/ListingScreens';
+import LoginScreen from './app/screens/LoginScreen';
+import MessagesScreen from './app/screens/MessagesScreen';
+import Picker from './app/components/Picker';
+import RegisterScreen from './app/screens/RegisterScreen';
+import Screen from './app/components/Screen';
+import TextInput from './app/components/TextInput';
+import ViewImageScreen from './app/screens/ViewImageScreen';
 import WelcomeScreen from './app/screens/WelcomeScreen';
 
-import AppText from './app/components/AppText';
-import AppButton from './app/components/AppButton';
-import Card from './app/components/Card';
-import ListingDetailsScreen from './app/screens/ListingDetailsScreen';
-import ViewImageScreen from './app/screens/ViewImageScreen';
-import MessagesScreen from './app/screens/MessagesScreen';
-import Screen from './app/components/Screen';
-import Icon from './app/components/Icon';
-import ListItem from './app/components/lists/ListItem';
-import AccountScreen from './app/screens/AccountScreen';
-import ListingScreens from './app/screens/ListingScreens';
-import AppTextInput from './app/components/AppTextInput';
-import AppPicker from './app/components/AppPicker';
-import LoginScreen from './app/screens/ListingsScreen';
-import RegisterScreen from './app/screens/RegisterScreen';
-import ListingEditScreen from './app/screens/ListingEditScreen';
 
 
 export default function App() {  
   return (  
-      // <MessagesScreen /> 
-      // <ListingScreens />
-      // <RegisterScreen />
-      <ListingEditScreen/>
-            
 
+      <ListingEditScreen/> 
+     
 );
 }

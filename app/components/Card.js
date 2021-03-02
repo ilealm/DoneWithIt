@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 
-import AppText from './AppText';
+import Text from './Text';
 import colors from '../config/colors';
 
 // I need to destructure this props to get the image. remember it has to have {}
@@ -12,8 +12,8 @@ function Card({title, subTitle, image}) {
     <View style={styles.card}>
       <Image style={styles.image} source={image}></Image>
       <View style={styles.detailsContainer}>
-        <AppText style={styles.title} numberOfLines={3}> {title} </AppText>
-        <AppText style={styles.subTitle} > {subTitle} </AppText>
+        <Text style={styles.title} numberOfLines={3}> {title} </Text>
+        <Text style={styles.subTitle} > {subTitle} </Text>
       </View>
     </View>
   );
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     color: colors.secondary,
     fontWeight: "bold",
   },
-  // AppText doesn't support style, so to work the one I declare here I need to go yo textApp
+  // Text doesn't support style, so to work the one I declare here I need to go yo textApp
   // and manipulate the styles param there 
   title:{
     marginBottom: 7,
