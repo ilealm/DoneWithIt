@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 
 
 import AccountScreen from './app/screens/AccountScreen';
@@ -21,9 +22,22 @@ import WelcomeScreen from './app/screens/WelcomeScreen';
 
 
 export default function App() {  
-  return (  
+  const requestPermission = async () => {
+    // the answer will be remembed in the divice
+    const { granted } = await ImagePicker.requestCameraRollPermissionsAsync();
+    if (!granted)
+      alert('You need to enable permission to access the library.')
+    else
+      alert('jere')
+  }
 
-      <ListingEditScreen/> 
-     
+  // if I mark this fun as async, implicity returns a promise, and useEffect CANT RETURN A PROMISE
+  useEffect(() => {
+    // BUT I can call a function to take care of the promise.
+    requestPermission();
+  }, [])
+
+  return (  
+      <Screen></Screen>   
 );
 }
