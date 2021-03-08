@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { View, } from 'react-native';
+import { Button, View, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
 
@@ -18,26 +18,56 @@ import Screen from './app/components/Screen';
 import TextInput from './app/components/TextInput';
 import ViewImageScreen from './app/screens/ViewImageScreen';
 import WelcomeScreen from './app/screens/WelcomeScreen';
-
+import * as Permissions from 'expo-permissions';
 
 
 export default function App() {  
-  const requestPermission = async () => {
-    // the answer will be remembed in the divice
-    const { granted } = await ImagePicker.requestCameraRollPermissionsAsync();
-    if (!granted)
-      alert('You need to enable permission to access the library.')
-    else
-      alert('jere')
+  const [imageUri, setImageUri] = useState();
+
+  // const requestPermission = async () => {
+  //   // EXAMPLE USING EXPO-PERMISSIONS
+  //   // import * as Permissions from 'expo-permissions';
+  //   // here I can pass multiple permission types
+  //   const result = await  Permissions.askAsync(Permissions.CAMERA_ROLL, Permissions.LOCATION  );  // this returns an object, so I need to use await
+  //   // result.granted, all the persmissions need to be granted
+
+
+  //   // EXAMPLE USING EXPO-IMAGE-PICKER
+  //   // import * as ImagePicker from 'expo-image-picker';
+  //   // the answer will be remembed in the divice
+  //   const { granted } = await ImagePicker.requestCameraRollPermissionsAsync();
+  //   if (!granted)
+  //     alert('You need to enable permission to access the library.')
+  //   else
+  //     alert('Access granted')
+  // }
+
+  // // if I mark this fun as async, implicity returns a promise, and useEffect CANT RETURN A PROMISE
+  // useEffect(() => {
+  //   // BUT I can call a function to take care of the promise.
+  //   requestPermission();    
+  // }, [])  // only execute once, on the 1st render
+
+   
+    
+
+  const selectImage = async () => {
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync();
+      if (!result.cancelled)
+        setImageUri(result.uri);
+    //  result.cancelled: boolean. If the user don't select anything, cancel returns true
+    // result.uri: is the full path to the image
+    } catch (error) {
+      console.log('Error reading an image.', error);
+    } 
   }
 
-  // if I mark this fun as async, implicity returns a promise, and useEffect CANT RETURN A PROMISE
-  useEffect(() => {
-    // BUT I can call a function to take care of the promise.
-    requestPermission();
-  }, [])
-
+  
   return (  
-      <Screen></Screen>   
+    <Screen>
+        <Button title="Select Image" onPress={ selectImage } />
+        <Image source={{uri: imageUri}} style={{ width:200, height:200 }} />
+      </Screen>   
 );
 }
