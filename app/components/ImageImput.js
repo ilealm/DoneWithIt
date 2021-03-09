@@ -2,30 +2,74 @@
  * Component that displays an image.
  * The imageUri belongs to the device's camara roll.
  */
-import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
-import colors from '../config/colors';
+import React, { useEffect } from 'react';
+import { View, StyleSheet, Image, TouchableWithoutFeedback, Alert } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import * as ImagePicker from 'expo-image-picker';
 
-function ImageImput( { imageUri }) {
+
+import colors from '../config/colors';
+
+function ImageImput( { imageUri, onChangeImage }) {
+  useEffect(() => {
+    requestPermission();
+  }, []);
+
+
+  const requestPermission = async () => {
+    const { granted } = await ImagePicker.requestCameraRollPermissionsAsync();
+    if (!granted) alert("You need to enable permission to access the library.");
+  };
+
+
+  const handlePress = () => {
+    // If I don't have an image, I will show the image library
+    if (!imageUri) 
+      selectImage();
+    else
+      Alert.alert('Delete', 'Are you sure you want to delete this image?',[
+       {text: 'Yes', onPress: () => onChangeImage(null)}, // means there is no image inside the container
+       {text:'No'},  ] )
+
+  } 
+
+  const selectImage = async () => {
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        // this is the config obj
+        mediaTypes: ImagePicker.MediaTypeOptions.Images, // I don't want them to choose videos
+        quality:0.5, // 0-1; one is highest quality
+      });
+      if (!result.cancelled) onChangeImage(result.uri);
+    //  result.cancelled: boolean. If the user don't select anything, cancel returns true
+    // result.uri: is the full path to the image
+    } catch (error) {
+      console.log('Error reading an image.', error);
+    } 
+  };
+
   return (
-    <View style={styles.container}>
-      {/* If I don't have an Image, display a gray image icon */}
-      { !imageUri && ( 
+    <TouchableWithoutFeedback
+      onPress={ handlePress }
+    >
+      <View style={styles.container}>
+        {/* If I don't have an Image, display a gray image icon */}
+        { !imageUri && ( 
           <MaterialCommunityIcons
           color={colors.medium}
           name="camera"
           size={40} 
-            />) }
+          />) }
 
-      {/* If I DO have an Image, display it */}
-      { imageUri && 
-          <Image 
+        {/* If I DO have an Image, display it */}
+        { imageUri && 
+            <Image 
             source={{uri: imageUri }} 
             style={ styles.image} />
-      }
+          }
 
-    </View>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 
