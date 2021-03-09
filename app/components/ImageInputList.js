@@ -34,8 +34,7 @@ function ImageInputList({ imageUris = [], onRemoveImage, onAddImage }) {
               style={styles.image} //I need to put the style here BC is not supported in the component
               > 
               <ImageImput 
-                  imageUri={uri} 
-                  
+                  imageUri={uri}                   
                   onChangeImage={() => onRemoveImage(uri) } 
               /> 
             </View>
@@ -45,11 +44,7 @@ function ImageInputList({ imageUris = [], onRemoveImage, onAddImage }) {
             onChangeImage={uri => onAddImage(uri)}
           />
         </View>
-      </ScrollView>
-  
-  
-  
-  
+      </ScrollView> 
   </View>
   );
 }
