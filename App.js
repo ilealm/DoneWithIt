@@ -46,11 +46,7 @@ export default function App() {
         onAddImage={ handleAdd }
         onRemoveImage={handleRemove}
         />
-{/* 
-        // this fun. takes the url of the image that the user select, and set the value to the state.
-      <ImageInput
-        onChangeImage={uri => setImageUris(uri)}
-      /> */}
+
 
     </Screen>   
 );

@@ -13,11 +13,17 @@ function ImageInputList({ imageUris = [], onRemoveImage, onAddImage }) {
     <View style={styles.container}>
       {/* diaplay current images on the imageUris array */}
       {imageUris.map(uri => (
-        <ImageImput 
-            imageUri={uri} 
-            key={uri}
-            onChangeImage={() => onRemoveImage(uri) } 
-        /> 
+        <View 
+        // I need to set the key here, BC this is the container.
+          key={uri} 
+          style={styles.image} //I need to put the style here BC is not supported in the component
+          > 
+          <ImageImput 
+              imageUri={uri} 
+              
+              onChangeImage={() => onRemoveImage(uri) } 
+          /> 
+        </View>
         ))}
      {/* Image input to add a new image */}
      <ImageImput
@@ -31,6 +37,9 @@ function ImageInputList({ imageUris = [], onRemoveImage, onAddImage }) {
 const styles = StyleSheet.create({
   container:{
     flexDirection: 'row', // I want to display the images horizontally
+  },
+  image:{
+    marginRight:10,
   },
 })
 
