@@ -1,5 +1,5 @@
 /**
- * Component that displays an image.
+ * Component that displays a single image.
  * The imageUri belongs to the device's camara roll.
  * If the component has a imageUri, it will be displayed, if not, a camara icon is displayed instead.
  * When the user clicks the iamge, can select one from the image library or delete the selected one.

@@ -8,6 +8,7 @@ import AccountScreen from './app/screens/AccountScreen';
 import Card from './app/components/Card';
 import Icon from './app/components/Icon';
 import ImageInput from './app/components/ImageImput';
+import ImageInputList from './app/components/ImageInputList';
 import ListingDetailsScreen from './app/screens/ListingDetailsScreen';
 import ListItem from './app/components/lists/ListItem';
 import ListingEditScreen from './app/screens/ListingEditScreen';
@@ -23,28 +24,34 @@ import WelcomeScreen from './app/screens/WelcomeScreen';
 
 
 export default function App() {  
-  const [imageUri, setImageUri] = useState();
+  const [imageUris, setImageUris] = useState([]);
 
-  // const selectImage = async () => {
-  //   try {
-  //     const result = await ImagePicker.launchImageLibraryAsync();
-  //     if (!result.cancelled)
-  //       setImageUri(result.uri);
-  //   //  result.cancelled: boolean. If the user don't select anything, cancel returns true
-  //   // result.uri: is the full path to the image
-  //   } catch (error) {
-  //     console.log('Error reading an image.', error);
-  //   } 
-  // }
-
+  // function that add a new uri to the array of imagesUris
+  const handleAdd = uri => {
+    // ...imageUris takes a copy of the original array
+    setImageUris([...imageUris, uri]);
+  }
   
+
+  const handleRemove = uri => {
+    setImageUris(imageUris.filter(
+      imageUri => imageUri !== uri ));
+  }
+
   return (  
     <Screen>
-         <ImageInput           
-            imageUri={ imageUri } 
-            // this fun. takes the url of the image that the user select, and set the value to the state.
-            onChangeImage={uri => setImageUri(uri)}
+      <ImageInputList           
+        imageUris={ imageUris } 
+        // onAddImage={ uri => handleAdd(uri)} // BC both arguments are =, I can simply this to the next line:
+        onAddImage={ handleAdd }
+        onRemoveImage={handleRemove}
         />
+{/* 
+        // this fun. takes the url of the image that the user select, and set the value to the state.
+      <ImageInput
+        onChangeImage={uri => setImageUris(uri)}
+      /> */}
+
     </Screen>   
 );
 }
