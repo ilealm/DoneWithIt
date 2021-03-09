@@ -19,12 +19,15 @@ import {
 } from "../components/forms";
 import CategoryPickerItem from "../components/CategoryPickerItem";
 import Screen from "../components/Screen";
+import FormImagePicker from "../components/forms/FormImagePicker";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
   price: Yup.number().required().min(1).max(10000).label("Price"),
   description: Yup.string().label("Description"),
   category: Yup.object().required().nullable().label("Category"),
+  // images: Yup.array().min(1).label("Images") // Images field is required. BUT I can have a more friendly array:
+  images: Yup.array().min(1,"Please select at least one image."),
 });
 
 const categories = [
@@ -93,10 +96,12 @@ function ListingEditScreen() {
           price: "",  // even price is a #, inside the Appform is a string
           description: "",
           category: null,
+          images:[], 
         }}
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
+      <FormImagePicker name="images"/>
       <FormField maxLength={255} name="title" placeholder="Title" />
        <FormField
           keyboardType="numeric"

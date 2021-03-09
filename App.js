@@ -24,30 +24,8 @@ import WelcomeScreen from './app/screens/WelcomeScreen';
 
 
 export default function App() {  
-  const [imageUris, setImageUris] = useState([]);
-
-  // function that add a new uri to the array of imagesUris
-  const handleAdd = uri => {
-    // ...imageUris takes a copy of the original array
-    setImageUris([...imageUris, uri]);
-  }
-  
-
-  const handleRemove = uri => {
-    setImageUris(imageUris.filter(
-      imageUri => imageUri !== uri ));
-  }
 
   return (  
-    <Screen>
-      <ImageInputList           
-        imageUris={ imageUris } 
-        // onAddImage={ uri => handleAdd(uri)} // BC both arguments are =, I can simply this to the next line:
-        onAddImage={ handleAdd }
-        onRemoveImage={handleRemove}
-        />
-
-
-    </Screen>   
+    <ListingEditScreen />
 );
 }
