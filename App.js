@@ -25,25 +25,25 @@ import WelcomeScreen from './app/screens/WelcomeScreen';
 export default function App() {  
   const [imageUri, setImageUri] = useState();
 
-  const selectImage = async () => {
-    try {
-      const result = await ImagePicker.launchImageLibraryAsync();
-      if (!result.cancelled)
-        setImageUri(result.uri);
-    //  result.cancelled: boolean. If the user don't select anything, cancel returns true
-    // result.uri: is the full path to the image
-    } catch (error) {
-      console.log('Error reading an image.', error);
-    } 
-  }
+  // const selectImage = async () => {
+  //   try {
+  //     const result = await ImagePicker.launchImageLibraryAsync();
+  //     if (!result.cancelled)
+  //       setImageUri(result.uri);
+  //   //  result.cancelled: boolean. If the user don't select anything, cancel returns true
+  //   // result.uri: is the full path to the image
+  //   } catch (error) {
+  //     console.log('Error reading an image.', error);
+  //   } 
+  // }
 
   
   return (  
     <Screen>
          <ImageInput           
-          imageUri={ imageUri } 
-          // this fun. takes the url of the image that the user select, and set the value to the state.
-          onChangeImage={uri => setImageUri(uri)}
+            imageUri={ imageUri } 
+            // this fun. takes the url of the image that the user select, and set the value to the state.
+            onChangeImage={uri => setImageUri(uri)}
         />
     </Screen>   
 );
