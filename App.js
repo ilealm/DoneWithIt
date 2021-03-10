@@ -58,16 +58,30 @@ const TweetDetails = ({ route }) => (
 // I put "Stack" with upper case BC it contains navigator screens: Stack.Navigator and Stack.Screen. 
 const Stack = createStackNavigator();
 const StackNavigator = () => (
-	<Stack.Navigator initialRouteName="Tweets">
+	<Stack.Navigator 
+  // these screenOptions are the same of Stack.Screen.options, but GLOBALLY to all screens in the app  
+    screenOptions={{
+      headerStyle:{ backgroundColor:'dodgerblue' },
+      headerTintColor:'white',
+    }}
+  >
 		{/* components to define our routes 
     only the ones usign Stack.Screen are able to acess prop navigation, UNLESS I use a hook
     */}
-		<Stack.Screen name="Tweets" component={Tweets} />
 		<Stack.Screen 
+      // header options. If I apply here, only here works. I could apply them to the navigator
+      // this overrides Stack.Navigator.screenOpions
+      options={{
+        headerStyle:{ backgroundColor:'tomato' },
+        headerTintColor:'white',
+        headerShown: true,
+       }}
+      name="Tweets" component={Tweets} />
+		<Stack.Screen       
       // options={{title: "Tweet Detail"}} // I can set to an obj, or a func that returns an obj
       // If I want the properties dynamically,  I can set to an obj, or a func that returns an obj.
       // IMPORTANT  I need to wrap the object in (), if don't, it won't work
-      options={ ({ route }) => ({title: route.params.id }) } 
+      // options={ ({ route }) => ({title: route.params.id }) } 
 
       name="TweetDetails" component={TweetDetails} />
 	</Stack.Navigator>
