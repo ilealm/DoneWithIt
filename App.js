@@ -3,7 +3,7 @@ import { Button, View, Image, Text } from 'react-native';
 // this is defined in the stack library
 import { createStackNavigator } from '@react-navigation/stack'
 // this is defined in the main navigation library
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 
 // import AccountScreen from './app/screens/AccountScreen';
 // import Card from './app/components/Card';
@@ -24,13 +24,27 @@ import Screen from './app/components/Screen';
 // import WelcomeScreen from './app/screens/WelcomeScreen';
 
 
+
+// this component is a child of Tweets, and can't access prop navigation, 
+// UNLESS I use the hook useNavigation which gives me access to prop navigation
+const Link = () => {
+  const navigation = useNavigation();  // gives me access to prop navigation
+  
+  return (
+    <Button
+      title="Click"
+      onPress={( ) => navigation.navigate('TweetDetails')}  />
+  )}
+
+
 const Tweets = ({ navigation }) => (
 	<Screen>
 		<Text> Tweets </Text>
-    <Button
+    <Link />
+    {/* <Button
       title="View Tweet" 
       // onPress={ () => navigation.navigate("TweetDetails")} />
-      onPress={ () => navigation.push("Tweets")} />
+      onPress={ () => navigation.push("Tweets")} /> */}
 
 	</Screen>
 )
