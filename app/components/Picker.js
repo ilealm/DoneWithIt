@@ -27,10 +27,10 @@ function AppPicker({
     icon, 
     items, 
     numberOfColumns= 1,  //adding a default value
-    onSelectedItem, 
+    onSelectItem, 
     //Passing a component to know to render a flat list o a list with colors. 
     //By default, send PickerItem component
-    PickerItemComponent = PickerItem, 
+    PickerItemComponent = PickerItem, //by default PickerItem is just plain text wo icons.
     placeholder, 
     selectedItem, 
     width='100%',
@@ -85,11 +85,12 @@ function AppPicker({
                     // item (object containing all the info). Is the item I'm rendering
                     item={item} // is a obj w a bunch of properties
                     label={item.label} 
-                    onPress={()=> {
+                    onPress={() => {
                       setModalVisible(false);
-                      onSelectedItem(item)
-                    }
-                    }  />
+                      onSelectItem(item);
+                    }}
+                    
+                  />
                 }
               />
             </Screen>

@@ -1,5 +1,6 @@
 /**
  * Custom hook to get the user's location
+ * For some reason is returning un defined.
  */
  import { useState, useEffect } from "react";
  import * as Location from 'expo-location';
@@ -31,7 +32,8 @@
    useEffect(() => {
      getLocation();
    }, []);
- 
+  
+
    return location;
  };
  

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 
@@ -20,6 +20,8 @@ import {
 import CategoryPickerItem from "../components/CategoryPickerItem";
 import Screen from "../components/Screen";
 import FormImagePicker from "../components/forms/FormImagePicker";
+import useLocation from '../hooks/useLocation';
+
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
@@ -88,7 +90,9 @@ const categories = [
 ];
 
 function ListingEditScreen() {
-  return (
+  const location = useLocation();
+
+ return (
     <Screen style={styles.container}>
       <Form
         initialValues={{
@@ -98,12 +102,15 @@ function ListingEditScreen() {
           category: null,
           images:[], 
         }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => console.log(location)}
         validationSchema={validationSchema}
       >
-      <FormImagePicker name="images"/>
-      <FormField maxLength={255} name="title" placeholder="Title" />
-       <FormField
+        <FormImagePicker name="images"/>
+        <FormField 
+          maxLength={255} 
+          name="title" 
+          placeholder="Title" />
+        <FormField
           keyboardType="numeric"
           maxLength={8}  //10000.00 => 8 chrs
           name="price"
@@ -114,11 +121,12 @@ function ListingEditScreen() {
           items={categories} 
           name="category" 
           numberOfColumns = {3}
-          PickerItemComponent = {CategoryPickerItem}
+          // here I'm declaring that I want to display the categories in the 
+          // form that contains the icon and on the bottom the description
+          PickerItemComponent = {CategoryPickerItem}  
           placeholder="Category"
           width= '50%'
         />
-
         <FormField
           maxLength={255}
           multiline

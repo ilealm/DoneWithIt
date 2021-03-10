@@ -1,5 +1,9 @@
+/**
+ * This component display an icon and a text (usually used from a PickerComponent) and let the user click
+ * an icon and call parent's callback funtion
+ */
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 
 import Icon from './Icon';
 import Text from './Text';
@@ -10,11 +14,14 @@ function CategoryPickerItem({
     onPress}) {
   return (
     <View style={styles.container}>
-      <Icon 
-        backgroundColor={item.backgroundColor} 
-        name={item.icon} 
-        size={80}
-      />
+      <TouchableOpacity onPress={onPress}>
+        <Icon 
+          backgroundColor={item.backgroundColor} 
+          name={item.icon} 
+          size={80}
+        />
+      </TouchableOpacity>
+      {/* I can add this to touchable, just need to fix the text alignment */}
       <Text style={styles.label} > {item.label} </Text>
     </View>
 
