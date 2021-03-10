@@ -63,7 +63,13 @@ const StackNavigator = () => (
     only the ones usign Stack.Screen are able to acess prop navigation, UNLESS I use a hook
     */}
 		<Stack.Screen name="Tweets" component={Tweets} />
-		<Stack.Screen name="TweetDetails" component={TweetDetails} />
+		<Stack.Screen 
+      // options={{title: "Tweet Detail"}} // I can set to an obj, or a func that returns an obj
+      // If I want the properties dynamically,  I can set to an obj, or a func that returns an obj.
+      // IMPORTANT  I need to wrap the object in (), if don't, it won't work
+      options={ ({ route }) => ({title: route.params.id }) } 
+
+      name="TweetDetails" component={TweetDetails} />
 	</Stack.Navigator>
 )
 
