@@ -24,9 +24,13 @@ import Screen from './app/components/Screen';
 // import WelcomeScreen from './app/screens/WelcomeScreen';
 
 
-const Tweets = () => (
+const Tweets = ({ navigation }) => (
 	<Screen>
 		<Text> Tweets </Text>
+    <Button
+      title="View Tweet" 
+      onPress={ () => navigation.navigate("TweetDetails")} />
+
 	</Screen>
 )
 
@@ -42,7 +46,7 @@ const StackNavigator = () => (
 	<Stack.Navigator initialRouteName="Tweets">
 		{/* components to define our routes */}
 		<Stack.Screen name="Tweets" component={Tweets} />
-		<Stack.Screen name="TweetsDetails" component={TweetDetails} />
+		<Stack.Screen name="TweetDetails" component={TweetDetails} />
 	</Stack.Navigator>
 )
 
