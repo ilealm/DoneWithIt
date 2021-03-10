@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
-import * as Location from 'expo-location';
+
 
 // IF I WANT TO USE THIS APPROACH, I HAVE TO DO THE SAME IN ALL PAGES
 // import {
@@ -20,6 +20,8 @@ import {
 import CategoryPickerItem from "../components/CategoryPickerItem";
 import Screen from "../components/Screen";
 import FormImagePicker from "../components/forms/FormImagePicker";
+import useLocation from '../hooks/useLocation';
+
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
@@ -88,28 +90,9 @@ const categories = [
 ];
 
 function ListingEditScreen() {
-  const [location, setLocation] = useState()
+  const location = useLocation();
 
-  //  cant have async fun on useEffect, so I have a separated function
-  const getLocation = async () => {
-    const { granted } = Location.requestPermissionsAsync()
-    if (!granted) return;
-
-    // result has coords, and coord has latitude, longitude
-    // Location.getCurrentPositionAsync is more accurate, but for performance test, I will use getLastKnownPositionAsync
-    // const { coords: {latitude, longitude} } = await Location.getLastKnownPositionAsync();
-    const { coords: {latitude, longitude} } = await Location.getCurrentPositionAsync();
-    setLocation({latitude, longitude})
-  }
-
-  // get the user permissions for the locations
-  useEffect(() => {
-    getLocation();
-  }, [])
-
-
-
-  return (
+ return (
     <Screen style={styles.container}>
       <Form
         initialValues={{
