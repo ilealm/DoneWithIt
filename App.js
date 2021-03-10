@@ -40,18 +40,18 @@ const Link = () => {
 const Tweets = ({ navigation }) => (
 	<Screen>
 		<Text> Tweets </Text>
-    <Link />
-    {/* <Button
+    {/* <Link /> */}
+    <Button
       title="View Tweet" 
-      // onPress={ () => navigation.navigate("TweetDetails")} />
-      onPress={ () => navigation.push("Tweets")} /> */}
+      onPress={ () => navigation.navigate("TweetDetails", {id: 1} )} /> 
+      {/* onPress={ () => navigation.push("Tweets")} /> */}
 
 	</Screen>
 )
 
-const TweetDetails = () => (
+const TweetDetails = ({ route }) => (
 	<Screen>
-		<Text>Tweet details </Text>
+		<Text>Tweet details {route.params.id} </Text>
 	</Screen>
 )
  
