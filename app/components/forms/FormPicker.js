@@ -19,9 +19,9 @@ function AppFormPicker({
       <Picker
         items={items}
         numberOfColumns = {numberOfColumns}
-        onSelectItem={(item) => setFieldValue(name, item)}  // name is the name of the field
-        PickerItemComponent = {PickerItemComponent}
-        placeholder={placeholder}
+        onSelectItem={(item) => setFieldValue(name, item)} // name is the name of the field
+        PickerItemComponent = {PickerItemComponent}  // is the list of categories showed in this case with icon and text
+        placeholder={placeholder}  // "Categories"
         selectedItem={values[name]}  // values is a key/value
         width={width}
       />

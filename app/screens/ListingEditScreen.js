@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
-
+import * as Location from 'expo-location';
 
 // IF I WANT TO USE THIS APPROACH, I HAVE TO DO THE SAME IN ALL PAGES
 // import {
@@ -88,6 +88,27 @@ const categories = [
 ];
 
 function ListingEditScreen() {
+  const [location, setLocation] = useState()
+
+  //  cant have async fun on useEffect, so I have a separated function
+  const getLocation = async () => {
+    const { granted } = Location.requestPermissionsAsync()
+    if (!granted) return;
+
+    // result has coords, and coord has latitude, longitude
+    // Location.getCurrentPositionAsync is more accurate, but for performance test, I will use getLastKnownPositionAsync
+    // const { coords: {latitude, longitude} } = await Location.getLastKnownPositionAsync();
+    const { coords: {latitude, longitude} } = await Location.getCurrentPositionAsync();
+    setLocation({latitude, longitude})
+  }
+
+  // get the user permissions for the locations
+  useEffect(() => {
+    getLocation();
+  }, [])
+
+
+
   return (
     <Screen style={styles.container}>
       <Form
@@ -98,12 +119,15 @@ function ListingEditScreen() {
           category: null,
           images:[], 
         }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => console.log(location)}
         validationSchema={validationSchema}
       >
-      <FormImagePicker name="images"/>
-      <FormField maxLength={255} name="title" placeholder="Title" />
-       <FormField
+        <FormImagePicker name="images"/>
+        <FormField 
+          maxLength={255} 
+          name="title" 
+          placeholder="Title" />
+        <FormField
           keyboardType="numeric"
           maxLength={8}  //10000.00 => 8 chrs
           name="price"
@@ -114,11 +138,12 @@ function ListingEditScreen() {
           items={categories} 
           name="category" 
           numberOfColumns = {3}
-          PickerItemComponent = {CategoryPickerItem}
+          // here I'm declaring that I want to display the categories in the 
+          // form that contains the icon and on the bottom the description
+          PickerItemComponent = {CategoryPickerItem}  
           placeholder="Category"
           width= '50%'
         />
-
         <FormField
           maxLength={255}
           multiline
