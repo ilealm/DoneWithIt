@@ -1,37 +1,38 @@
-/**
- * Custom hook to get the user's location
- */
- import { useState, useEffect } from "react";
- import * as Location from 'expo-location';
- 
- export default useLocation = () => {
-   const [location, setLocation] = useState();
- 
-   //  cant have async fun on useEffect, so I have a separated function
-   const getLocation = async () => {
-     try {
-       const { granted } = Location.requestPermissionsAsync();
-       if (!granted) return;
-   
-       // result of the await has coords, and coord has latitude, longitude
-       // Location.getCurrentPositionAsync is more accurate, but for performance, I will use getLastKnownPositionAsync
-       // const { coords: {latitude, longitude} } = await Location.getCurrentPositionAsync();
-       // {latitude, longitude} are coords properties
-       const { coords: { latitude, longitude } } = await Location.getLastKnownPositionAsync();
-     
-       setLocation({latitude, longitude});
-       
-     } catch (error) {
-         console.log(error)
-     }
- 
-   }
- 
-   // get the user permissions for the locations
-   useEffect(() => {
-     getLocation();
-   }, []);
- 
-   return location;
- };
- 
+import React from 'react';
+import { Button, View, Image, Text } from 'react-native';
+// this is defined in the stack library
+import { createStackNavigator } from '@react-navigation/stack'
+// this is defined in the main navigation library
+import { NavigationContainer } from "@react-navigation/native";
+
+const Tweets = () => (
+  <Screen>
+    <Text> Tweets </Text>
+  </Screen>
+)
+
+const TweetDetails = () => (
+  <Screen>
+    <Text>Tweet Details </Text>
+  </Screen>
+) 
+
+// I put "Stack" with upper case BC it contains navigator screens:  Stack.Navigator and Stack.Screen. 
+const Stack = createStackNavigator();
+const StackNavigator = () => (
+  <Stack.Navigator>
+    {/* components to define our routes */}
+    <Stack.Screen name="TweetsDetails" component={TweetDetails} />
+    <Stack.Screen name="Tweets" component={Tweets} />
+  </Stack.Navigator>
+)
+
+
+export default function App() {  
+  return (  
+    // I need to grap my stack in a main container
+   <NavigationContainer>
+     <StackNavigator />
+   </NavigationContainer>
+);
+}
