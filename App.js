@@ -29,7 +29,8 @@ const Tweets = ({ navigation }) => (
 		<Text> Tweets </Text>
     <Button
       title="View Tweet" 
-      onPress={ () => navigation.navigate("TweetDetails")} />
+      // onPress={ () => navigation.navigate("TweetDetails")} />
+      onPress={ () => navigation.push("Tweets")} />
 
 	</Screen>
 )
@@ -44,7 +45,9 @@ const TweetDetails = () => (
 const Stack = createStackNavigator();
 const StackNavigator = () => (
 	<Stack.Navigator initialRouteName="Tweets">
-		{/* components to define our routes */}
+		{/* components to define our routes 
+    only the ones usign Stack.Screen are able to acess prop navigation, UNLESS I use a hook
+    */}
 		<Stack.Screen name="Tweets" component={Tweets} />
 		<Stack.Screen name="TweetDetails" component={TweetDetails} />
 	</Stack.Navigator>
