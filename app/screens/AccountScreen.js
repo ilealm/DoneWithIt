@@ -21,11 +21,12 @@ const menuItems = [
     icon: {
       name: "email",
       backgroundColor: colors.secondary,
-    }
+    },
+    targetScreen: "Messages",
   },
 ]
 
-function AccountScreen(props) {
+function AccountScreen({ navigation }) {
   return (
     <Screen style={styles.screen}>
       {/* Here is an image on left, a title and subtitle on right. */}
@@ -51,6 +52,7 @@ function AccountScreen(props) {
                 name={item.icon.name} 
                 backgroundColor={item.icon.backgroundColor} 
                 />   }
+              onPress={() => navigation.navigate(item.targetScreen)}
           />   } 
           ItemSeparatorComponent={ListItemSeparator}
           >
