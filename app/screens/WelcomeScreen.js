@@ -4,7 +4,8 @@ import Button from '../components/Button';
 
 // import Button from '../components/old_Button'
 
-function WelcomeScreen(props) {
+// this {navigation} comes from AuthNavigator
+function WelcomeScreen({ navigation }) {
   return (
    <ImageBackground 
     blurRadius={10}
@@ -16,8 +17,9 @@ function WelcomeScreen(props) {
       </View>
 
       <View style={styles.buttonsContainer}>
-        <Button title='Login' />
-        <Button title='Register' color='secondary' />        
+      {/* onPress={() => navigation.navigate(routes.LOGIN)} */}
+        <Button title='Login' onPress={() => navigation.navigate("Login")} />
+        <Button title='Register' onPress={() => navigation.navigate("Register")} color='secondary' />        
       </View>
 
    </ImageBackground>
