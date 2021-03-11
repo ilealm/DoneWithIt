@@ -4,6 +4,8 @@ import { Button, View, Image, Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack'
 // this is defined in the main navigation library
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 // import AccountScreen from './app/screens/AccountScreen';
 // import Card from './app/components/Card';
@@ -87,11 +89,43 @@ const StackNavigator = () => (
 	</Stack.Navigator>
 )
 
+
+const Account = () => (
+	<Screen>
+		<Text>Account </Text>
+	</Screen>
+)
+
+
+const Tab = createBottomTabNavigator();
+// tab has 2 properties: Navigator and Screen
+const TabNavigator = () => (
+  <Tab.Navigator
+    tabBarOptions={{
+      activeBackgroundColor:'tomato',
+      activeTintColor:'white',
+      inactiveBackgroundColor: '#eee',
+      inactiveTintColor:'blue'
+    }}
+  >
+    {/* each screen represents a tab in the app */}
+    <Tab.Screen 
+      options={{ 
+        // if I destruct size, is the size that react recommend
+        // react will tell the color from whatever I said in tabBarOptions 
+        tabBarIcon: ({size, color}) => <MaterialCommunityIcons 
+                            name='home' size={size} color={color} /> }}
+      name="Feed" component={Tweets} />
+    <Tab.Screen name="Account" component={Account} />
+  </Tab.Navigator>
+)
+
 export default function App() { 
 return ( 
 	// I need to grap my stack in a main container
 	<NavigationContainer>
-		<StackNavigator />
+		{/* <StackNavigator /> */}
+    <TabNavigator />
 	</NavigationContainer>
 );
 }
