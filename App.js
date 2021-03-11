@@ -22,6 +22,7 @@ import AuthNavigator from './app/navigation/AuthNavigator';
 // import Picker from './app/components/Picker';
 // import RegisterScreen from './app/screens/RegisterScreen';
 import ListingEditScreen from './app/screens/ListingEditScreen';
+import navigationTheme from './app/navigation/navigationTheme';
 // import TextInput from './app/components/TextInput';
 // import ViewImageScreen from './app/screens/ViewImageScreen';
 // import WelcomeScreen from './app/screens/WelcomeScreen';
@@ -31,7 +32,7 @@ import ListingEditScreen from './app/screens/ListingEditScreen';
 
 export default function App() { 
   return ( 
-    <NavigationContainer>
+    <NavigationContainer theme={navigationTheme}>
       <AuthNavigator />
     </NavigationContainer>
    
