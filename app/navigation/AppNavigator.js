@@ -21,12 +21,16 @@ const AppNavigator = () => (
                  }} 
     />
     <Tab.Screen name="ListingEdit" component={ListingEditScreen} 
-        options={{
+        // this options can set to a obj, or a function that returns an object. 
+        // If retturns an object, I need to wrap it in parentesis, BC if not react will take it as code and not an object  
+        options={({ navigation }) => ({  
           // for having the big round center botton:
-          tabBarButton: () => <NewListingButton  />,
+          // here I need the navigation object
+          // tabBarButton: () => <NewListingButton />,
+          tabBarButton: () => <NewListingButton onPress={() => navigation.navigate("ListingEdit") } />,
           tabBarIcon:({ color, size }) =>
-              <MaterialCommunityIcons name="plus-circle" color={color} size={size} /> 
-                }} 
+             ( <MaterialCommunityIcons name="plus-circle" color={color} size={size} /> ),
+      })} 
     />
     <Tab.Screen name="Account" component={AccountNavigator} 
           options={{
