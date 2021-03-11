@@ -7,14 +7,35 @@ import colors from '../config/colors';
 import ListItem from '../components/lists/ListItem';
 import Text from '../components/Text';
 
-function ListingDetailsScreen(props) {
+function ListingDetailsScreen({ route }) {
+  // in order to get the right item, I need to get the params
+  const listing = route.params;
+
   return (
+    // version with hard code options
+    // <View>
+    //   <Image  style={styles.image} source={require('../assets/jacket.jpg')} />
+    //   <View style={styles.detailsContainer}>
+    //     <Text style={styles.title}>Red jacket for sale </Text>
+    //     {/* here I'm saying price and not subTitle BC this page is not intended to reuse */}
+    //     <Text style={styles.price}>$100 </Text>        
+    //   </View>
+    //   <View style={styles.userContainer}>
+    //     {/* This component display the seller image, name and listings */}
+    //     <ListItem
+    //       image={require("../assets/dow.jpg")}
+    //       title="Josh Dow"
+    //       subTitle= "5 Listings" 
+    //     />
+    //   </View>
+    // </View>
+    // NOW that I have this component inside the navigation, I can access route.
     <View>
-      <Image  style={styles.image} source={require('../assets/jacket.jpg')} />
+      <Image  style={styles.image} source={listing.image} />
       <View style={styles.detailsContainer}>
-        <Text style={styles.title}>Red jacket for sale </Text>
+        <Text style={styles.title}>{listing.title} </Text>
         {/* here I'm saying price and not subTitle BC this page is not intended to reuse */}
-        <Text style={styles.price}>$100 </Text>        
+        <Text style={styles.price}>{listing.price} </Text>        
       </View>
       <View style={styles.userContainer}>
         {/* This component display the seller image, name and listings */}
@@ -23,7 +44,6 @@ function ListingDetailsScreen(props) {
           title="Josh Dow"
           subTitle= "5 Listings" 
         />
-
       </View>
     </View>
     );
