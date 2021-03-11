@@ -23,6 +23,7 @@ import AuthNavigator from './app/navigation/AuthNavigator';
 // import RegisterScreen from './app/screens/RegisterScreen';
 import ListingEditScreen from './app/screens/ListingEditScreen';
 import navigationTheme from './app/navigation/navigationTheme';
+import AppNavigator from './app/navigation/AppNavigator';
 // import TextInput from './app/components/TextInput';
 // import ViewImageScreen from './app/screens/ViewImageScreen';
 // import WelcomeScreen from './app/screens/WelcomeScreen';
@@ -33,7 +34,9 @@ import navigationTheme from './app/navigation/navigationTheme';
 export default function App() { 
   return ( 
     <NavigationContainer theme={navigationTheme}>
-      <AuthNavigator />
+      {/* Depending on user auth, is what I will display */}
+      {/* <AuthNavigator /> */}
+      <AppNavigator />
     </NavigationContainer>
    
   );
