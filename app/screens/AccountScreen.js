@@ -6,6 +6,7 @@ import { View, StyleSheet, FlatList } from 'react-native'
 import { ListItem, ListItemSeparator } from "../components/lists";
 import Icon from '../components/Icon';
 import colors from '../config/colors';
+import routes from "../navigation/routes";
 import Screen from '../components/Screen';
 
 
@@ -15,17 +16,21 @@ const menuItems = [
     icon: {
       name: "format-list-bulleted",
       backgroundColor: colors.primary,
-    }
+    },
+    // TODO: Add a real target for this module
+    targetScreen: routes.MESSAGES,
   },
   { title : 'My Messages',
     icon: {
       name: "email",
       backgroundColor: colors.secondary,
-    }
+    },
+    // targetScreen: "Messages",
+    targetScreen: routes.MESSAGES,
   },
 ]
 
-function AccountScreen(props) {
+function AccountScreen({ navigation }) {
   return (
     <Screen style={styles.screen}>
       {/* Here is an image on left, a title and subtitle on right. */}
@@ -51,6 +56,7 @@ function AccountScreen(props) {
                 name={item.icon.name} 
                 backgroundColor={item.icon.backgroundColor} 
                 />   }
+              onPress={() => navigation.navigate(item.targetScreen)}
           />   } 
           ItemSeparatorComponent={ListItemSeparator}
           >
