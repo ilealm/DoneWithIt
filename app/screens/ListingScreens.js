@@ -35,8 +35,6 @@ function ListingScreens({ navigation }) {
   const loadListings = async () => {
     const response = await listingsApi.getListings();
     setListings(response.data);
-
-    console.log('the error is: ', response.ok  )
   }
 
   return (
