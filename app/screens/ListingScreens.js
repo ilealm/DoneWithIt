@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 
 import Card from '../components/Card';
-import colors from '../config/colors'
+import colors from '../config/colors';
+import Button from '../components/Button';
 import listingsApi from "../api/listings";
 import routes from '../navigation/routes';
 import Screen from '../components/Screen';
+import AppText from '../components/Text';
 
 // const listings = [
 //   {
@@ -25,6 +27,9 @@ import Screen from '../components/Screen';
 function ListingScreens({ navigation }) {
   // var to store the listings I get from the server
   const [listings, setListings] = useState([]);
+  const [error, setError] = useState(false);
+
+
 
   // fill the api the first time the component is render, using useEffect
   useEffect(() => {
@@ -33,12 +38,23 @@ function ListingScreens({ navigation }) {
   
   // I need to call a separate fun. BC I CAN HAVE PROMISES IN hooks!!
   const loadListings = async () => {
-    const response = await listingsApi.getListings();
+    // this promise will be always resolve (apisouce), even it I get an error. I don't need try catch
+    const response = await listingsApi.getListings(); 
+
+    if (!response.ok) return setError(true);
+      
+    setError(false);
     setListings(response.data);
   }
 
   return (
     <Screen style={styles.screen}>
+      {/* Error handling */}
+      {error && <>
+        <AppText>Couldn't retrive the listings.</AppText>
+        <Button title="Retry" onPress={loadListings} />
+      </>}
+      
       {/* I will use a flatlist to display a bunch of cards */}
       <FlatList
         // data expects an array of objects.
