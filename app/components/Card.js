@@ -1,20 +1,25 @@
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, 
+  StyleSheet, 
+  Image, 
+  TouchableWithoutFeedback } from 'react-native';
+// import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 import Text from './Text';
 import colors from '../config/colors';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 // usually this component is called from ListingScreen
 
 // I need to destructure this props to get the image. remember it has to have {}
 // function Card(props) {
-function Card({title, subTitle, image, onPress  }) {
+function Card({title, subTitle, imageUrl, onPress  }) {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       {/* this container is the main, where each card is displayed. */}
       <View style={styles.card}>
-        <Image style={styles.image} source={image}></Image>
+        {/* <Image style={styles.image} source={image}></Image> */}
+        {/* now image is an object, so I need to add {} */}
+        <Image style={styles.image} source={{ uri: imageUrl }} />
         <View style={styles.detailsContainer}>
           <Text style={styles.title} numberOfLines={3}> {title} </Text>
           <Text style={styles.subTitle} > {subTitle} </Text>
