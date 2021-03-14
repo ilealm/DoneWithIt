@@ -22,6 +22,7 @@ import Screen from "../components/Screen";
 import FormImagePicker from "../components/forms/FormImagePicker";
 import listingsApi from '../api/listings'; 
 import useLocation from '../hooks/useLocation';
+import UploadScreen from "./UploadScreen";
 
 
 const validationSchema = Yup.object().shape({
@@ -92,12 +93,21 @@ const categories = [
 
 function ListingEditScreen() {
   const location = useLocation();
+  const [uploadVisible, setUploadVisible] = useState(false)
+  const [progress, setProgress] = useState(0)
 
   const handleSubmit = async(listing) => {
+    setUploadVisible(true);
+
     // listingsApi.addListing(listing) // but here is missing the location
     const result = await listingsApi.addListing({...listing, location},
-        progress => console.log(progress) // callback fun to call while uploading
+        // progress => console.log(progress) // callback fun to call while uploading
+        progress => setProgress(progress) // callback fun to call while uploading
       ); // here I'm passing an object with the listing AND the location
+    
+    setUploadVisible(false);
+
+
     if (!result.ok)
       return alert('Could not save the listing.');
     
@@ -107,6 +117,7 @@ function ListingEditScreen() {
 
  return (
     <Screen style={styles.container}>
+      <UploadScreen progress={progress} visible={uploadVisible} />
       <Form
         initialValues={{
           title: "",
