@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
+// import { ActivityIndicator} from 'react-native';  
 
+import ActivityIndicator from "../components/ActivityIndicator";
 import Card from '../components/Card';
 import colors from '../config/colors';
 import Button from '../components/Button';
@@ -28,6 +30,7 @@ function ListingScreens({ navigation }) {
   // var to store the listings I get from the server
   const [listings, setListings] = useState([]);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
 
 
@@ -38,8 +41,10 @@ function ListingScreens({ navigation }) {
   
   // I need to call a separate fun. BC I CAN HAVE PROMISES IN hooks!!
   const loadListings = async () => {
+    setLoading(true);
     // this promise will be always resolve (apisouce), even it I get an error. I don't need try catch
     const response = await listingsApi.getListings(); 
+    setLoading(false);
 
     if (!response.ok) return setError(true);
       
@@ -54,7 +59,12 @@ function ListingScreens({ navigation }) {
         <AppText>Couldn't retrive the listings.</AppText>
         <Button title="Retry" onPress={loadListings} />
       </>}
-      
+
+      {/* I'm replacing this with lottie animation */}
+      {/* <ActivityIndicator animating={loading} size="large" /> */}
+      <ActivityIndicator visible={loading} />
+        
+  
       {/* I will use a flatlist to display a bunch of cards */}
       <FlatList
         // data expects an array of objects.
