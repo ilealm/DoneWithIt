@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
+// import { ActivityIndicator} from 'react-native';  
 
+import ActivityIndicator from "../components/ActivityIndicator";
 import Card from '../components/Card';
 import colors from '../config/colors';
 import Button from '../components/Button';
@@ -57,12 +59,15 @@ function ListingScreens({ navigation }) {
         <AppText>Couldn't retrive the listings.</AppText>
         <Button title="Retry" onPress={loadListings} />
       </>}
-      <ActivityIndicator animating={loading} size="large" />
+
+      {/* I'm replacing this with lottie animation */}
+      {/* <ActivityIndicator animating={loading} size="large" /> */}
+      <ActivityIndicator visible={true} />
         
   
 
 
-      {/* I will use a flatlist to display a bunch of cards */}
+      {/* I will use a flatlist to display a bunch of cards
       <FlatList
         // data expects an array of objects.
         data={ listings }
@@ -76,7 +81,7 @@ function ListingScreens({ navigation }) {
             // onPress={() => navigation.navigate("ListingDetails", item)}   />   
             onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}   />   
           }
-      />
+      /> */}
 
     </Screen>
   );
