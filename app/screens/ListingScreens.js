@@ -62,12 +62,10 @@ function ListingScreens({ navigation }) {
 
       {/* I'm replacing this with lottie animation */}
       {/* <ActivityIndicator animating={loading} size="large" /> */}
-      <ActivityIndicator visible={true} />
+      <ActivityIndicator visible={loading} />
         
   
-
-
-      {/* I will use a flatlist to display a bunch of cards
+      {/* I will use a flatlist to display a bunch of cards */}
       <FlatList
         // data expects an array of objects.
         data={ listings }
@@ -81,7 +79,7 @@ function ListingScreens({ navigation }) {
             // onPress={() => navigation.navigate("ListingDetails", item)}   />   
             onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}   />   
           }
-      /> */}
+      />
 
     </Screen>
   );
