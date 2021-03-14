@@ -4,10 +4,36 @@ const endpoint = '/listings';
 
 // const getListings = () => client.get(endpoint);
 // example sending args (wont affect BC this wont be used anywhere)
-const getListings = (a,b,c) => client.get(endpoint);
+const getListings = () => client.get(endpoint);
+
+
+const addListing = listing => {
+  // each http request has a special header called content-type
+  // for upload files and images: multipart/form-data tells the server that the body of the info is diveded in multiple parts
+  // FormData auto says is multipart/form-data
+  const data = new FormData();
+  data.append('title', listing.title);  // key, value
+  data.append('price', listing.price);  
+  data.append('categoryId', listing.category.value);  // category is an object  
+  data.append('description', listing.description);  
+  // I can have more than 1 image
+  listing.images.forEach( (image, index) => 
+    data.append('images', {
+        name: 'image' + index,
+        type: 'iamge/jpeg',
+        uri: image
+    }));
+
+    if (listing.location)
+      data.append('location', JSON.stringify(listing.location));  // i need to pass it to text
+
+    return client.post(endpoint, data);  // this post returns a promise
+}
 
 // I can export an object
 export default{
+  // expose our functions
   getListings,
+  addListing, 
 };
 

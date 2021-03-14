@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { BackHandler, StyleSheet } from "react-native";
 import * as Yup from "yup";
 
 
@@ -20,6 +20,7 @@ import {
 import CategoryPickerItem from "../components/CategoryPickerItem";
 import Screen from "../components/Screen";
 import FormImagePicker from "../components/forms/FormImagePicker";
+import listingsApi from '../api/listings'; 
 import useLocation from '../hooks/useLocation';
 
 
@@ -92,6 +93,16 @@ const categories = [
 function ListingEditScreen() {
   const location = useLocation();
 
+  const handleSubmit = async(listing) => {
+    // listingsApi.addListing(listing) // but here is missing the location
+    const result = await listingsApi.addListing({...listing, location}); // here I'm passing an object with the listing AND the location
+    if (!result.ok)
+      return alert('Could not save the listing.');
+    
+    alert('Success');
+  }
+
+
  return (
     <Screen style={styles.container}>
       <Form
@@ -102,7 +113,8 @@ function ListingEditScreen() {
           category: null,
           images:[], 
         }}
-        onSubmit={(values) => console.log(location)}
+        // onSubmit={(values) => console.log(location)}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         <FormImagePicker name="images"/>
