@@ -36,14 +36,15 @@ function ListingScreens({ navigation }) {
   // const [loading, setLoading] = useState(false);
   
   // here i'm rename some return object (so I don't have to change anything) and passig a REFERENCE the function, NOT calling it
-  const {data: listings, error, loading, request: loadListings } = useApi(listingsApi.getListings);  
+  // const {data: listings, error, loading, request: loadListings } = useApi(listingsApi.getListings);  
   // BUT IF I WANT TO MAKE MULTIPLE API CALLS, I CAN DO THIS BETTER:
-  // const getListingsApi = useApi(listingsApi.getListings);
+  const getListingsApi = useApi(listingsApi.getListings);
 
 
   // fill the api the first time the component is render, using useEffect
   useEffect(() => {
-    loadListings(1,2,3);  //example passign dummy args
+    // loadListings(1,2,3);  //example passign dummy args
+    getListingsApi.request(1,2,3);
   } , []); // execute only once, when is rendered
   
   // ALL THIS LOGIC WILL BE HANDLED MY useAPI
@@ -63,20 +64,21 @@ function ListingScreens({ navigation }) {
   return (
     <Screen style={styles.screen}>
       {/* Error handling */}
-      {error && <>
+      {getListingsApi.error && <>
         <AppText>Couldn't retrive the listings.</AppText>
         <Button title="Retry" onPress={loadListings} />
       </>}
 
       {/* I'm replacing this with lottie animation */}
       {/* <ActivityIndicator animating={loading} size="large" /> */}
-      <ActivityIndicator visible={loading} />
+      <ActivityIndicator visible={getListingsApi.loading} />
         
   
       {/* I will use a flatlist to display a bunch of cards */}
       <FlatList
         // data expects an array of objects.
-        data={ listings }
+        // data={ listings }
+        data={ getListingsApi.data }
         keyExtractor={ listing => listing.id.toString() }
         renderItem = {({item}) => 
           <Card 
