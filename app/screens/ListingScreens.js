@@ -10,6 +10,8 @@ import listingsApi from "../api/listings";
 import routes from '../navigation/routes';
 import Screen from '../components/Screen';
 import AppText from '../components/Text';
+import { useAccessibilityInfo } from '@react-native-community/hooks';
+import useApi from '../hooks/useApi';
 
 // const listings = [
 //   {
@@ -27,48 +29,56 @@ import AppText from '../components/Text';
 // ]
 
 function ListingScreens({ navigation }) {
-  // var to store the listings I get from the server
-  const [listings, setListings] = useState([]);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-
+  // ALL THIS LOGIC WILL BE HANDLED MY useAPI
+  // // var to store the listings I get from the server
+  // const [listings, setListings] = useState([]);
+  // const [error, setError] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  
+  // here i'm rename some return object (so I don't have to change anything) and passig a REFERENCE the function, NOT calling it
+  // const {data: listings, error, loading, request: loadListings } = useApi(listingsApi.getListings);  
+  // BUT IF I WANT TO MAKE MULTIPLE API CALLS, I CAN DO THIS BETTER:
+  const getListingsApi = useApi(listingsApi.getListings);
 
 
   // fill the api the first time the component is render, using useEffect
   useEffect(() => {
-    loadListings();
+    // loadListings(1,2,3);  //example passign dummy args
+    getListingsApi.request(1,2,3);
   } , []); // execute only once, when is rendered
   
-  // I need to call a separate fun. BC I CAN HAVE PROMISES IN hooks!!
-  const loadListings = async () => {
-    setLoading(true);
-    // this promise will be always resolve (apisouce), even it I get an error. I don't need try catch
-    const response = await listingsApi.getListings(); 
-    setLoading(false);
+  // ALL THIS LOGIC WILL BE HANDLED MY useAPI
+  // // I need to call a separate fun. BC I CAN HAVE PROMISES IN hooks!!
+  // const loadListings = async () => {
+  //   setLoading(true);
+  //   // this promise will be always resolve (apisouce), even it I get an error. I don't need try catch
+  //   const response = await listingsApi.getListings(); 
+  //   setLoading(false);
 
-    if (!response.ok) return setError(true);
+  //   if (!response.ok) return setError(true);
       
-    setError(false);
-    setListings(response.data);
-  }
+  //   setError(false);
+  //   setListings(response.data);
+  // }
 
   return (
     <Screen style={styles.screen}>
       {/* Error handling */}
-      {error && <>
+      {getListingsApi.error && <>
         <AppText>Couldn't retrive the listings.</AppText>
         <Button title="Retry" onPress={loadListings} />
       </>}
 
       {/* I'm replacing this with lottie animation */}
       {/* <ActivityIndicator animating={loading} size="large" /> */}
-      <ActivityIndicator visible={loading} />
+      <ActivityIndicator visible={getListingsApi.loading} />
         
   
       {/* I will use a flatlist to display a bunch of cards */}
       <FlatList
         // data expects an array of objects.
-        data={ listings }
+        // data={ listings }
+        data={ getListingsApi.data }
         keyExtractor={ listing => listing.id.toString() }
         renderItem = {({item}) => 
           <Card 
