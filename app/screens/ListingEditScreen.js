@@ -95,7 +95,9 @@ function ListingEditScreen() {
 
   const handleSubmit = async(listing) => {
     // listingsApi.addListing(listing) // but here is missing the location
-    const result = await listingsApi.addListing({...listing, location}); // here I'm passing an object with the listing AND the location
+    const result = await listingsApi.addListing({...listing, location},
+        progress => console.log(progress) // callback fun to call while uploading
+      ); // here I'm passing an object with the listing AND the location
     if (!result.ok)
       return alert('Could not save the listing.');
     
