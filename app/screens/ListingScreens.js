@@ -30,17 +30,20 @@ import useApi from '../hooks/useApi';
 
 function ListingScreens({ navigation }) {
   // ALL THIS LOGIC WILL BE HANDLED MY useAPI
-  // here i'm rename some return object (so I don't have to change anything) and passig a REFERENCE the function, NOT calling it
-  const {data: listings, error, loading, request: loadListings } = useApi(listingsApi.getListings);  
   // // var to store the listings I get from the server
   // const [listings, setListings] = useState([]);
   // const [error, setError] = useState(false);
   // const [loading, setLoading] = useState(false);
+  
+  // here i'm rename some return object (so I don't have to change anything) and passig a REFERENCE the function, NOT calling it
+  const {data: listings, error, loading, request: loadListings } = useApi(listingsApi.getListings);  
+  // BUT IF I WANT TO MAKE MULTIPLE API CALLS, I CAN DO THIS BETTER:
+  // const getListingsApi = useApi(listingsApi.getListings);
 
 
   // fill the api the first time the component is render, using useEffect
   useEffect(() => {
-    loadListings();
+    loadListings(1,2,3);  //example passign dummy args
   } , []); // execute only once, when is rendered
   
   // ALL THIS LOGIC WILL BE HANDLED MY useAPI

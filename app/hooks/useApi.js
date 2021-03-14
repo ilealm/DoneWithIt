@@ -12,16 +12,16 @@ export default useAPI = ( apiFunc ) => {
 
 
   // request represents the request to the server
-  // if I want to pass arguments, use the spred operator
-  //   const request = async (...args) => {
-  const request = async () => {
+  //   const request = async () => {
+  // if I want to pass ZERO or more arguments, use the spred operator (put them inside a single array)
+  const request = async (...args) => {
 
     setLoading(true);
     // this promise will be always resolve (apisouce), even it I get an error. I don't need try catch
     // const response = await listingsApi.getListings(); 
     // exaple sending args
     // const response = await apiFunc(...args); 
-    const response = await apiFunc(); 
+    const response = await apiFunc(...args); 
     setLoading(false);
 
     if (!response.ok) return setError(true);
