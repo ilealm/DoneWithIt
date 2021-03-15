@@ -96,7 +96,9 @@ function ListingEditScreen() {
   const [uploadVisible, setUploadVisible] = useState(false)
   const [progress, setProgress] = useState(0)
 
-  const handleSubmit = async(listing) => {
+
+  // resetForm (is a function) forms part of FormikBag, and Im destructuring it
+  const handleSubmit = async(listing, {resetForm}) => {
     // the next line is really important
     setProgress(0); // I need this so the progress bar doesn't move back and forward
     setUploadVisible(true);
@@ -112,7 +114,9 @@ function ListingEditScreen() {
       if (!result.ok) {
         setUploadVisible(false);
         return alert('Could not save the listing.');
-    }
+      }
+
+      resetForm(); // this only reset the image and category
   };
 
 
