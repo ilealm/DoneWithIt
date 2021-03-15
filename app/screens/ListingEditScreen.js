@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { BackHandler, StyleSheet } from "react-native";
 import * as Yup from "yup";
 
 
@@ -20,7 +20,9 @@ import {
 import CategoryPickerItem from "../components/CategoryPickerItem";
 import Screen from "../components/Screen";
 import FormImagePicker from "../components/forms/FormImagePicker";
+import listingsApi from '../api/listings'; 
 import useLocation from '../hooks/useLocation';
+import UploadScreen from "./UploadScreen";
 
 
 const validationSchema = Yup.object().shape({
@@ -91,9 +93,39 @@ const categories = [
 
 function ListingEditScreen() {
   const location = useLocation();
+  const [uploadVisible, setUploadVisible] = useState(false)
+  const [progress, setProgress] = useState(0)
+
+
+  // resetForm (is a function) forms part of FormikBag, and Im destructuring it
+  const handleSubmit = async(listing, {resetForm}) => {
+    // the next line is really important
+    setProgress(0); // I need this so the progress bar doesn't move back and forward
+    setUploadVisible(true);
+
+    // listingsApi.addListing(listing) // but here is missing the location
+    const result = await listingsApi.addListing({...listing, location},
+        // progress => console.log(progress) // callback fun to call while uploading
+        progress => setProgress(progress) // callback fun to call while uploading
+      ); // here I'm passing an object with the listing AND the location
+    
+      
+      
+      if (!result.ok) {
+        setUploadVisible(false);
+        return alert('Could not save the listing.');
+      }
+
+      resetForm(); // this only reset the image and category
+  };
+
 
  return (
     <Screen style={styles.container}>
+      <UploadScreen 
+          onDone={() => setUploadVisible(false)} 
+          progress={progress} 
+          visible={uploadVisible} />
       <Form
         initialValues={{
           title: "",
@@ -102,7 +134,8 @@ function ListingEditScreen() {
           category: null,
           images:[], 
         }}
-        onSubmit={(values) => console.log(location)}
+        // onSubmit={(values) => console.log(location)}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         <FormImagePicker name="images"/>
