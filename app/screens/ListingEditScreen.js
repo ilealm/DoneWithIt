@@ -107,19 +107,21 @@ function ListingEditScreen() {
         progress => setProgress(progress) // callback fun to call while uploading
       ); // here I'm passing an object with the listing AND the location
     
-    setUploadVisible(false);
-
-
-    if (!result.ok)
-      return alert('Could not save the listing.');
-    
-    alert('Success');
-  }
+      
+      
+      if (!result.ok) {
+        setUploadVisible(false);
+        return alert('Could not save the listing.');
+    }
+  };
 
 
  return (
     <Screen style={styles.container}>
-      <UploadScreen progress={progress} visible={uploadVisible} />
+      <UploadScreen 
+          onDone={() => setUploadVisible(false)} 
+          progress={progress} 
+          visible={uploadVisible} />
       <Form
         initialValues={{
           title: "",
