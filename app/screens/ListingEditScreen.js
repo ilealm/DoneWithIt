@@ -97,6 +97,8 @@ function ListingEditScreen() {
   const [progress, setProgress] = useState(0)
 
   const handleSubmit = async(listing) => {
+    // the next line is really important
+    setProgress(0); // I need this so the progress bar doesn't move back and forward
     setUploadVisible(true);
 
     // listingsApi.addListing(listing) // but here is missing the location
