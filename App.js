@@ -27,6 +27,7 @@ import ListingEditScreen from './app/screens/ListingEditScreen';
 import navigationTheme from './app/navigation/navigationTheme';
 import AppNavigator from './app/navigation/AppNavigator';
 import { endAsyncEvent } from 'react-native/Libraries/Performance/Systrace';
+import OfflineNotice from './app/components/OfflineNotice';
 // import TextInput from './app/components/TextInput';
 // import ViewImageScreen from './app/screens/ViewImageScreen';
 // import WelcomeScreen from './app/screens/WelcomeScreen';
@@ -59,11 +60,14 @@ export default function App() {
 
   // demo();
 
-  return ( 
-    <NavigationContainer theme={navigationTheme}>
-      {/* Depending on user auth, is what I will display */}
-      {/* <AuthNavigator /> */}
-      <AppNavigator />
-    </NavigationContainer>   
+  return (
+    <> 
+      <OfflineNotice />
+      <NavigationContainer theme={navigationTheme}>
+        {/* Depending on user auth, is what I will display */}
+        {/* <AuthNavigator /> */}
+        <AppNavigator />
+      </NavigationContainer>   
+    </>
   );
 }
