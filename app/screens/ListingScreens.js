@@ -10,7 +10,7 @@ import listingsApi from "../api/listings";
 import routes from '../navigation/routes';
 import Screen from '../components/Screen';
 import AppText from '../components/Text';
-import { useAccessibilityInfo } from '@react-native-community/hooks';
+// import { useAccessibilityInfo } from '@react-native-community/hooks';
 import useApi from '../hooks/useApi';
 
 // const listings = [
@@ -39,6 +39,9 @@ function ListingScreens({ navigation }) {
   // const {data: listings, error, loading, request: loadListings } = useApi(listingsApi.getListings);  
   // BUT IF I WANT TO MAKE MULTIPLE API CALLS, I CAN DO THIS BETTER:
   const getListingsApi = useApi(listingsApi.getListings);
+
+  // BUG: the data if not loading in the device
+  // console.log(getListingsApi)
 
 
   // fill the api the first time the component is render, using useEffect
