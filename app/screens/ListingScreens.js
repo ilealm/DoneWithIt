@@ -66,7 +66,7 @@ function ListingScreens({ navigation }) {
       {/* Error handling */}
       {getListingsApi.error && <>
         <AppText>Couldn't retrive the listings.</AppText>
-        <Button title="Retry" onPress={loadListings} />
+       <Button title="Retry" onPress={loadListings} />
       </>}
 
       {/* I'm replacing this with lottie animation */}
@@ -87,7 +87,9 @@ function ListingScreens({ navigation }) {
             // image = {item.image}  // this works for the static array I used at the begginig
             imageUrl = {item.images[0].url}  // the data from API is slightly different, so I need to change this 
             // onPress={() => navigation.navigate("ListingDetails", item)}   />   
-            onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}   />   
+            onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}  
+            thumbnailUrl={item.images[0].thumbnailUrl}
+          />   
           }
       />
 

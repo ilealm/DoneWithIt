@@ -2,10 +2,9 @@ import client from './client';
 
 const endpoint = '/listings';
 
-// const getListings = () => client.get(endpoint);
-// example sending args (wont affect BC this wont be used anywhere)
+// this method get the info, from the backEnd point of cache if existing
 const getListings = () => client.get(endpoint);
-
+// 
 
 const addListing = (listing, onUploadProgress ) => {
   // each http request has a special header called content-type

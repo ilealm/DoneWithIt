@@ -1,7 +1,7 @@
 import React from 'react';
-
-import { View, StyleSheet, Image } from 'react-native'
-
+// import { View, StyleSheet, Image } from 'react-native'  // now the Image component is from expo-image-cache
+import { View, StyleSheet } from 'react-native'
+import { Image } from 'react-native-expo-image-cache';
 
 import colors from '../config/colors';
 import ListItem from '../components/lists/ListItem';
@@ -31,7 +31,13 @@ function ListingDetailsScreen({ route }) {
     // </View>
     // NOW that I have this component inside the navigation, I can access route.
     <View>
-      <Image  style={styles.image} source={listing.image} />
+      {/* I'm changing this component to Image from expo-image-cache
+      <Image  style={styles.image} source={listing.image} /> */}
+      {/* im using Image component exactly like card component */}
+      <Image  style={styles.image} 
+              preview={{uri: listing.images[0].thumbnailUrl}}
+              tint='light'
+              uri={listing.images[0].url} />
       <View style={styles.detailsContainer}>
         <Text style={styles.title}>{listing.title} </Text>
         {/* here I'm saying price and not subTitle BC this page is not intended to reuse */}
