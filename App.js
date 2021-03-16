@@ -44,28 +44,26 @@ export default function App() {
   // unsubscribe();
   // but I can have all this manage using useNetInfo hook, which handles the subcribe and unsubscribe
   // const netInfo = useNetInfo();
-  const demo = async () => {
-    try{
-      await AsyncStorage.setItem('person', JSON.stringify({id:1}));
-      // to read
-      const value = await AsyncStorage.getItem('person');
-      const person = JSON.parse(value);
-      console.log(person);
-    } 
-    catch (error) {
-      console.log(error);
-    }
-  }
+  // const demo = async () => {
+  //   try{
+  //     await AsyncStorage.setItem('person', JSON.stringify({id:1}));
+  //     // to read
+  //     const value = await AsyncStorage.getItem('person');
+  //     const person = JSON.parse(value);
+  //     console.log(person);
+  //   } 
+  //   catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
-  demo();
+  // demo();
 
   return ( 
-    null
-    // <NavigationContainer theme={navigationTheme}>
-    //   {/* Depending on user auth, is what I will display */}
-    //   {/* <AuthNavigator /> */}
-    //   <AppNavigator />
-    // </NavigationContainer>
-   
+    <NavigationContainer theme={navigationTheme}>
+      {/* Depending on user auth, is what I will display */}
+      {/* <AuthNavigator /> */}
+      <AppNavigator />
+    </NavigationContainer>   
   );
 }

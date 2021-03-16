@@ -66,7 +66,7 @@ function ListingScreens({ navigation }) {
       {/* Error handling */}
       {getListingsApi.error && <>
         <AppText>Couldn't retrive the listings.</AppText>
-        <Button title="Retry" onPress={loadListings} />
+       <Button title="Retry" onPress={loadListings} />
       </>}
 
       {/* I'm replacing this with lottie animation */}
