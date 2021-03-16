@@ -1,102 +1,54 @@
-import React from 'react';
-import { Button, View, Image, Text } from 'react-native';
-// this is defined in the stack library
-import { createStackNavigator } from '@react-navigation/stack'
-// this is defined in the main navigation library
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React, { useEffect } from "react";
+import { FlatList, StyleSheet } from "react-native";
 
-import Screen from './app/components/Screen';
+import ActivityIndicator from "../components/ActivityIndicator";
+import Button from "../components/Button";
+import Card from "../components/Card";
+import colors from "../config/colors";
+import listingsApi from "../api/listings";
+import routes from "../navigation/routes";
+import Screen from "../components/Screen";
+import AppText from "../components/Text";
+import useApi from "../hooks/useApi";
 
+function ListingsScreen({ navigation }) {
+  const getListingsApi = useApi(listingsApi.getListings);
 
-const Tweets = ({ navigation }) => (
-	<Screen>
-		<Text> Tweets </Text>
-    {/* <Link /> */}
-    <Button
-      title="View Tweet" 
-      onPress={ () => navigation.navigate("TweetDetails", {id: 1} )} />
-      {/* onPress={ () => navigation.push("Tweets")} /> */}
+  useEffect(() => {
+    getListingsApi.request();
+  }, []);
 
-	</Screen>
-)
-
-const TweetDetails = ({ route }) => (
-	<Screen>
-		<Text>Tweet details {route.params.id} </Text>
-	</Screen>
-)
- 
-// I put "Stack" with upper case BC it contains navigator screens: Stack.Navigator and Stack.Screen. 
-const Stack = createStackNavigator();
-const StackNavigator = () => (
-	<Stack.Navigator 
-  // these screenOptions are the same of Stack.Screen.options, but GLOBALLY to all screens in the app  
-    screenOptions={{
-      headerStyle:{ backgroundColor:'dodgerblue' },
-      headerTintColor:'white',
-    }}
-  >
-		{/* components to define our routes 
-    only the ones usign Stack.Screen are able to acess prop navigation, UNLESS I use a hook
-    */}
-		<Stack.Screen 
-      // header options. If I apply here, only here works. I could apply them to the navigator
-      // this overrides Stack.Navigator.screenOpions
-      options={{
-        headerStyle:{ backgroundColor:'tomato' },
-        headerTintColor:'white',
-        headerShown: true,
-       }}
-      name="Tweets" component={Tweets} />
-		<Stack.Screen       
-      // options={{title: "Tweet Detail"}} // I can set to an obj, or a func that returns an obj
-      // If I want the properties dynamically,  I can set to an obj, or a func that returns an obj.
-      // IMPORTANT  I need to wrap the object in (), if don't, it won't work
-      // options={ ({ route }) => ({title: route.params.id }) } 
-
-      name="TweetDetails" component={TweetDetails} />
-	</Stack.Navigator>
-)
-
-
-const Account = () => (
-	<Screen>
-		<Text>Account </Text>
-	</Screen>
-)
-
-
-const Tab = createBottomTabNavigator();
-// tab has 2 properties: Navigator and Screen
-const TabNavigator = () => (
-  <Tab.Navigator
-    tabBarOptions={{
-      activeBackgroundColor:'tomato',
-      activeTintColor:'white',
-      inactiveBackgroundColor: '#eee',
-      inactiveTintColor:'blue'
-    }}
-  >
-    {/* each screen represents a tab in the app */}
-    <Tab.Screen 
-      options={{ 
-        // if I destruct size, is the size that react recommend
-        // react will tell the color from whatever I said in tabBarOptions 
-        tabBarIcon: ({size, color}) => <MaterialCommunityIcons 
-                            name='home' size={size} color={color} /> }}
-      name="Feed" component={StackNavigator} />
-    <Tab.Screen name="Account" component={Account} />
-  </Tab.Navigator>
-)
-
-export default function App() { 
-return ( 
-	// I need to grap my stack in a main container
-	<NavigationContainer>
-		{/* <StackNavigator /> */}
-    <TabNavigator />
-	</NavigationContainer>
-);
+  return (
+    <Screen style={styles.screen}>
+      {getListingsApi.error && (
+        <>
+          <AppText>Couldn't retrieve the listings.</AppText>
+          <Button title="Retry" onPress={getListingsApi.request} />
+        </>
+      )}
+      <ActivityIndicator visible={getListingsApi.loading} />
+      <FlatList
+        data={getListingsApi.data}
+        keyExtractor={(listing) => listing.id.toString()}
+        renderItem={({ item }) => (
+          <Card
+            title={item.title}
+            subTitle={"$" + item.price}
+            imageUrl={item.images[0].url}
+            onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
+            thumbnailUrl={item.images[0].thumbnailUrl}
+          />
+        )}
+      />
+    </Screen>
+  );
 }
+
+const styles = StyleSheet.create({
+  screen: {
+    padding: 20,
+    backgroundColor: colors.light,
+  },
+});
+
+export default ListingsScreen;

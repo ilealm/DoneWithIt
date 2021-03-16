@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 // import { ActivityIndicator} from 'react-native';  
 
@@ -44,7 +44,7 @@ function ListingScreens({ navigation }) {
   // fill the api the first time the component is render, using useEffect
   useEffect(() => {
     // loadListings(1,2,3);  //example passign dummy args
-    getListingsApi.request(1,2,3);
+    getListingsApi.request();
   } , []); // execute only once, when is rendered
   
   // ALL THIS LOGIC WILL BE HANDLED MY useAPI
@@ -64,10 +64,12 @@ function ListingScreens({ navigation }) {
   return (
     <Screen style={styles.screen}>
       {/* Error handling */}
-      {getListingsApi.error && <>
-        <AppText>Couldn't retrive the listings.</AppText>
-       <Button title="Retry" onPress={loadListings} />
-      </>}
+      {getListingsApi.error && (
+        <>
+          <AppText>Couldn't retrieve the listings.</AppText>
+          <Button title="Retry" onPress={getListingsApi.request} />
+        </>
+      )}
 
       {/* I'm replacing this with lottie animation */}
       {/* <ActivityIndicator animating={loading} size="large" /> */}
