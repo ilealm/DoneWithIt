@@ -4,7 +4,7 @@ const endpoint = '/listings';
 
 // this method get the info, from the backEnd point of cache if existing
 const getListings = () => client.get(endpoint);
-
+// 
 
 const addListing = (listing, onUploadProgress ) => {
   // each http request has a special header called content-type
