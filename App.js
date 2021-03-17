@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, View, Image, Text } from 'react-native';
 import { AsyncStorage } from 'react-native';
 // this is defined in the stack library
@@ -27,6 +27,7 @@ import ListingEditScreen from './app/screens/ListingEditScreen';
 import navigationTheme from './app/navigation/navigationTheme';
 import AppNavigator from './app/navigation/AppNavigator';
 import OfflineNotice from './app/components/OfflineNotice';
+import AuthContext from './app/auth/contex';
 // import TextInput from './app/components/TextInput';
 // import ViewImageScreen from './app/screens/ViewImageScreen';
 // import WelcomeScreen from './app/screens/WelcomeScreen';
@@ -59,14 +60,21 @@ export default function App() {
 
   // demo();
 
+    const [user, setUser] = useState();
+
   return (
-    <> 
+    // all the values I pass will be accesable to all the components inside the provider.
+    // BS I want to pass the user and the fun to update it, I need to pass an object with 2 props
+    // <AuthContext.Provider value={user}> 
+    <AuthContext.Provider value={{ user, setUser }}> 
       <OfflineNotice />
       <NavigationContainer theme={navigationTheme}>
         {/* Depending on user auth, is what I will display */}
-        <AuthNavigator />
-        {/* <AppNavigator /> */}
+        {user ? <AuthNavigator /> 
+              : <AppNavigator /> 
+        }
+        
       </NavigationContainer>   
-    </>
+    </AuthContext.Provider>
   );
 }

@@ -6,6 +6,7 @@ import jwtDecode from 'jwt-decode';
 import authApi from '../api/auth';
 import { Form, FormField, SubmitButton, ErrorMessage } from "../components/forms";
 import Screen from "../components/Screen";
+import AuthContext from "../auth/contex";
 
 
 const validationSchema = Yup.object().shape({
@@ -14,6 +15,7 @@ const validationSchema = Yup.object().shape({
 });
 
 function LoginScreen(props) {
+  const authContext = useContext(AuthContext);
   const [loginFailed, setLoginFailed] = useState(false);
 
   const handleSubmit = async ({email, password}) => {
@@ -23,9 +25,11 @@ function LoginScreen(props) {
     if (!result.ok) return setLoginFailed(true);
     
     setLoginFailed(false);
-    // decode and log the user object
+    // decode and log the user object and store it to make it available to the complete app
     const user = jwtDecode(result.data)
-    console.log(user);
+    // console.log(user);
+    authContext.setUser(user);
+
   }
 
   return (
