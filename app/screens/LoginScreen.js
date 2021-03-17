@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { StyleSheet, Image } from "react-native";
 import * as Yup from "yup";
 
-import Screen from "../components/Screen";
-import { Form, FormField, SubmitButton, ErrorMessage } from "../components/forms";
 import authApi from '../api/auth';
+import { Form, FormField, SubmitButton, ErrorMessage } from "../components/forms";
+import Screen from "../components/Screen";
 
 
 const validationSchema = Yup.object().shape({
@@ -14,7 +14,7 @@ const validationSchema = Yup.object().shape({
 
 function LoginScreen(props) {
   const [loginFailed, setLoginFailed] = useState(false);
-  // loginFailed';m destructuring object loginInfo and passing user and password
+
   const handleSubmit = async ({email, password}) => {
     const result = await authApi.login(email, password)
 
@@ -23,7 +23,6 @@ function LoginScreen(props) {
     
     setLoginFailed(false);
     console.log(result.data)
-
   }
 
   return (
@@ -39,8 +38,7 @@ function LoginScreen(props) {
         <ErrorMessage
           error="Invalid email and/or password."  // I could put the error from the object's response
           visible={loginFailed}
-
-         />
+        />
         <FormField
           autoCapitalize="none"
           autoCorrect={false}
