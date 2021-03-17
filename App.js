@@ -27,7 +27,7 @@ import ListingEditScreen from './app/screens/ListingEditScreen';
 import navigationTheme from './app/navigation/navigationTheme';
 import AppNavigator from './app/navigation/AppNavigator';
 import OfflineNotice from './app/components/OfflineNotice';
-import AuthContext from './app/auth/contex';
+import AuthContext from './app/auth/context';
 // import TextInput from './app/components/TextInput';
 // import ViewImageScreen from './app/screens/ViewImageScreen';
 // import WelcomeScreen from './app/screens/WelcomeScreen';
@@ -70,10 +70,9 @@ export default function App() {
       <OfflineNotice />
       <NavigationContainer theme={navigationTheme}>
         {/* Depending on user auth, is what I will display */}
-        {user ? <AuthNavigator /> 
-              : <AppNavigator /> 
+        {user ? <AppNavigator /> 
+              : <AuthNavigator /> 
         }
-        
       </NavigationContainer>   
     </AuthContext.Provider>
   );

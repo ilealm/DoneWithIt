@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 // BE SURE TO IMPORT FlatList from react-Native, not gesture.
 // import { FlatList } from 'react-native-gesture-handler';
 import { View, StyleSheet, FlatList } from 'react-native'
 
+import AuthContext from '../auth/context';
 import { ListItem, ListItemSeparator } from "../components/lists";
 import Icon from '../components/Icon';
 import colors from '../config/colors';
@@ -31,13 +32,17 @@ const menuItems = [
 ]
 
 function AccountScreen({ navigation }) {
+  // const authContext = useContext(AuthContext);
+  const {user} = useContext(AuthContext);
+  // console.log(user)
+
   return (
     <Screen style={styles.screen}>
       {/* Here is an image on left, a title and subtitle on right. */}
       <View style={styles.container} >
         <ListItem
-          title="Iris Leal"
-          subTitle="Engineer"
+          title={ user.name }
+          subTitle={ user.email}
           image={require('../assets/dow.jpg')}  />
         </View>
       {/* here are the menu Items */}
