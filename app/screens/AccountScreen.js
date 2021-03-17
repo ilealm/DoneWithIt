@@ -9,6 +9,7 @@ import Icon from '../components/Icon';
 import colors from '../config/colors';
 import routes from "../navigation/routes";
 import Screen from '../components/Screen';
+import authStorage from '../auth/storage';
 
 
 
@@ -35,6 +36,13 @@ function AccountScreen({ navigation }) {
   // const authContext = useContext(AuthContext);
   const {user, setUser} = useContext(AuthContext);
   // console.log(user)
+
+  const handleLogOut = () => {
+    // cleat the user from the context
+    setUser(null);
+    // clear the stored token (renamed storage to authStorge)
+    authStorage.removeToken();
+  }
 
   return (
     <Screen style={styles.screen}>
@@ -73,7 +81,7 @@ function AccountScreen({ navigation }) {
         title="Log out"
         IconComponent={
           <Icon name="logout" backgroundColor="#ffe66d" /> }  
-        onPress={() => setUser(null)}
+        onPress={handleLogOut}
         />
     </Screen>
   );

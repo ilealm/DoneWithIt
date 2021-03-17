@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, View, Image, Text } from 'react-native';
 import { AsyncStorage } from 'react-native';
 // this is defined in the stack library
@@ -8,6 +8,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import NetInfo,  { useNetInfo } from '@react-native-community/netinfo';
+import jwtDecode from 'jwt-decode';
 
 // import AccountScreen from './app/screens/AccountScreen';
 import AuthNavigator from './app/navigation/AuthNavigator';
@@ -28,6 +29,7 @@ import navigationTheme from './app/navigation/navigationTheme';
 import AppNavigator from './app/navigation/AppNavigator';
 import OfflineNotice from './app/components/OfflineNotice';
 import AuthContext from './app/auth/context';
+import authStorage from './app/auth/storage';
 // import TextInput from './app/components/TextInput';
 // import ViewImageScreen from './app/screens/ViewImageScreen';
 // import WelcomeScreen from './app/screens/WelcomeScreen';
@@ -61,6 +63,21 @@ export default function App() {
   // demo();
 
     const [user, setUser] = useState();
+
+    const restoreToken = async () => {
+      const token = await authStorage.getToken();
+      if (!token) return;
+
+      // decode the token that is returned from the token and store it
+      setUser(jwtDecode(token));
+
+    }
+
+    // restore the auth token only the first time
+    useEffect(() => {
+      // renamed the symbol storage to authStorage
+      restoreToken();
+    }, []);
 
   return (
     // all the values I pass will be accesable to all the components inside the provider.

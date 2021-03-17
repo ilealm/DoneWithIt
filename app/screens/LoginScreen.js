@@ -7,6 +7,7 @@ import authApi from '../api/auth';
 import { Form, FormField, SubmitButton, ErrorMessage } from "../components/forms";
 import Screen from "../components/Screen";
 import AuthContext from "../auth/context";
+import authStorage from "../auth/storage";
 
 
 const validationSchema = Yup.object().shape({
@@ -28,10 +29,11 @@ function LoginScreen(props) {
     // decode and log the user object and store it to make it available to the complete app
     const user = jwtDecode(result.data)
     // console.log(user);
-    authContext.setUser(user);
     // here app.js will re-render BC when I change a context, all its children gets re-render, and BC there is
     // now a user, I got send to listings (AppNavigator)
-
+    authContext.setUser(user);
+    // now store the app token. I rename storage to authStorage
+    authStorage.storeToken(result.data);
   }
 
   return (
