@@ -65,40 +65,41 @@ function ListingScreens({ navigation }) {
   // }
 
   return (
-    <Screen style={styles.screen}>
-      {/* Error handling */}
-      {getListingsApi.error && (
-        <>
-          <AppText>Couldn't retrieve the listings.</AppText>
-          <Button title="Retry" onPress={getListingsApi.request} />
-        </>
-      )}
-
+    <>
       {/* I'm replacing this with lottie animation */}
       {/* <ActivityIndicator animating={loading} size="large" /> */}
       <ActivityIndicator visible={getListingsApi.loading} />
-        
-  
-      {/* I will use a flatlist to display a bunch of cards */}
-      <FlatList
-        // data expects an array of objects.
-        // data={ listings }
-        data={ getListingsApi.data }
-        keyExtractor={ listing => listing.id.toString() }
-        renderItem = {({item}) => 
-          <Card 
-            title = {item.title}
-            subTitle= {"$" + item.price}
-            // image = {item.image}  // this works for the static array I used at the begginig
-            imageUrl = {item.images[0].url}  // the data from API is slightly different, so I need to change this 
-            // onPress={() => navigation.navigate("ListingDetails", item)}   />   
-            onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}  
-            thumbnailUrl={item.images[0].thumbnailUrl}
-          />   
-          }
-      />
+      <Screen style={styles.screen}>
+        {/* Error handling */}
+        {getListingsApi.error && (
+          <>
+            <AppText>Couldn't retrieve the listings.</AppText>
+            <Button title="Retry" onPress={getListingsApi.request} />
+          </>
+        )}
+         
+    
+        {/* I will use a flatlist to display a bunch of cards */}
+        <FlatList
+          // data expects an array of objects.
+          // data={ listings }
+          data={ getListingsApi.data }
+          keyExtractor={ listing => listing.id.toString() }
+          renderItem = {({item}) => 
+            <Card 
+              title = {item.title}
+              subTitle= {"$" + item.price}
+              // image = {item.image}  // this works for the static array I used at the begginig
+              imageUrl = {item.images[0].url}  // the data from API is slightly different, so I need to change this 
+              // onPress={() => navigation.navigate("ListingDetails", item)}   />   
+              onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}  
+              thumbnailUrl={item.images[0].thumbnailUrl}
+            />   
+            }
+        />
 
-    </Screen>
+      </Screen>
+    </>
   );
 }
 
