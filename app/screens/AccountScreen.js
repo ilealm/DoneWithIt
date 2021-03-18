@@ -1,15 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
 // BE SURE TO IMPORT FlatList from react-Native, not gesture.
 // import { FlatList } from 'react-native-gesture-handler';
 import { View, StyleSheet, FlatList } from 'react-native'
 
-import AuthContext from '../auth/context';
 import { ListItem, ListItemSeparator } from "../components/lists";
 import Icon from '../components/Icon';
 import colors from '../config/colors';
 import routes from "../navigation/routes";
 import Screen from '../components/Screen';
-import authStorage from '../auth/storage';
+import useAuth from '../auth/useAuth';
+// import authStorage from '../auth/storage';
+// import AuthContext from '../auth/context';
 
 
 
@@ -34,15 +35,18 @@ const menuItems = [
 
 function AccountScreen({ navigation }) {
   // const authContext = useContext(AuthContext);
-  const {user, setUser} = useContext(AuthContext);
+  // const {user, setUser} = useContext(AuthContext);
+  // const {user, setUser } = useAuth();
+  const { user, logOut } = useAuth(); //now I don't need the setUSer, BC is handled by the useAuth hook
   // console.log(user)
-
-  const handleLogOut = () => {
-    // cleat the user from the context
-    setUser(null);
-    // clear the stored token (renamed storage to authStorge)
-    authStorage.removeToken();
-  }
+  
+  // I will encapsulate this in the useAuth hook, so now I don't need this function, I can just call it 
+      // const handleLogOut = () => {
+      // clear the user from the context
+      // setUser(null);
+      // // clear the stored token (renamed storage to authStorge)
+      // authStorage.removeToken();
+  // }
 
   return (
     <Screen style={styles.screen}>
@@ -81,7 +85,7 @@ function AccountScreen({ navigation }) {
         title="Log out"
         IconComponent={
           <Icon name="logout" backgroundColor="#ffe66d" /> }  
-        onPress={handleLogOut}
+        onPress={() => {logOut()}}
         />
     </Screen>
   );
