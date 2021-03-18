@@ -6,6 +6,7 @@
  * Im using SecureStore in Expo
  */
 import * as SecureStore from 'expo-secure-store';
+import jwtDecode from 'jwt-decode';
 
 const key = "authToken";
 
@@ -27,6 +28,13 @@ const getToken = async () => {
   }
 }
 
+const getUser = async () => {
+  const token = await getToken();
+
+  return (token) ? jwtDecode(token) : null;
+  
+}
+
 
 // used when the user logs out
 const removeToken = async () => {
@@ -39,6 +47,7 @@ const removeToken = async () => {
 
 export default {
   storeToken,
-  getToken,
+  // getToken,
+  getUser,  // I change this BC this module should have the interaction with the auth
   removeToken,
 };
