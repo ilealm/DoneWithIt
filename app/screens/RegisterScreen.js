@@ -47,7 +47,8 @@ function RegisterScreen() {
   };
 
   return (
-    <>
+    // I need this fragment to center the form on top of the overlay and the ActivityIndicator takes all the screen
+    <>  
       <ActivityIndicator visible={registerApi.loading || loginApi.loading} />
       <Screen style={styles.container}>
         <Form
