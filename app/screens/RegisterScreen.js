@@ -22,9 +22,10 @@ const validationSchema = Yup.object().shape({
 });
 
 function RegisterScreen() {
-  const registerApi = useApi(usersApi.register);  //CHECKING, some code changed
-  const loginApi = useApi(authApi.login);  //checked
-  const auth = useAuth();  // checked
+  // useApi receives a function
+  const registerApi = useApi(usersApi.register);  // i'm sending the function that is in charge to create the user
+  const loginApi = useApi(authApi.login);  
+  const auth = useAuth();  
   const [error, setError] = useState();
   
   const handleSubmit = async (userInfo) => {
@@ -47,7 +48,7 @@ function RegisterScreen() {
 
   return (
     <>
-      {/* <ActivityIndicator visible={registerApi.loading || loginApi.loading} /> */}
+      <ActivityIndicator visible={registerApi.loading || loginApi.loading} />
       <Screen style={styles.container}>
         <Form
           initialValues={{ name: "", email: "", password: "" }}   // if I don't assing a initial value, the validation schema won't work.
