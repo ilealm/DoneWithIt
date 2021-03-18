@@ -47,7 +47,7 @@ const removeToken = async () => {
 
 export default {
   storeToken,
-  // getToken,
+  getToken,
   getUser,  // I change this BC this module should have the interaction with the auth
   removeToken,
 };
