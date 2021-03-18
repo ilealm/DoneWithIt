@@ -9,6 +9,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import NetInfo,  { useNetInfo } from '@react-native-community/netinfo';
 import jwtDecode from 'jwt-decode';
+import AppLoading from 'expo-app-loading';
+
+
 
 // import AccountScreen from './app/screens/AccountScreen';
 import AuthNavigator from './app/navigation/AuthNavigator';
@@ -63,6 +66,8 @@ export default function App() {
   // demo();
 
     const [user, setUser] = useState();
+    // state to know is the app is ready and I don't show splash windows
+    const [isReady, setIsReady] = useState(false);
 
     const restoreToken = async () => {
       const token = await authStorage.getToken();
@@ -73,11 +78,21 @@ export default function App() {
 
     }
 
-    // restore the auth token only the first time
-    useEffect(() => {
-      // renamed the symbol storage to authStorage
-      restoreToken();
-    }, []);
+    // // restore the auth token only the first time
+    // useEffect(() => {
+    //   // renamed the symbol storage to authStorage
+    //   restoreToken();
+    // }, []);
+
+    if (!isReady){
+      return (
+        <AppLoading 
+            startAsync={restoreToken} 
+            onFinish={() => setIsReady(true)} 
+            onError={console.warn}  // I NEED to have onError, otherwise will generate error
+        />
+    );}
+    
 
   return (
     // all the values I pass will be accesable to all the components inside the provider.
