@@ -6,12 +6,30 @@
  */
 import { create } from 'apisauce';
 import cache from '../utility/cache';
+import authStorage from '../auth/storage';
 
 // URL MUST be capitalized letters. 
 // in development, is pointing to my machine. DO NOT use localhost BC andriod is not going to be able to see the API
 const apiClient = create({
   baseURL: 'http://127.0.0.1:9000/api',
 });
+
+
+// CALL PROTECTED API ENDPOINTS
+// im applying a transformation so I can add an auth token (the one that backend is expecting to grant access.
+// so I don't have to send the token separated)
+apiClient.addAsyncRequestTransform(async (request) => {
+  const authToken = await authStorage.getToken();
+  if (!authToken) return;
+
+  // add the auth token to the request.header so it can he access, for example to 
+  // http://localhost:9000/api/my/listings which requeres auth token
+  // x-auth-token is a variable defined on the backend
+  request.headers["x-auth-token"] = authToken;
+
+});
+
+
 
 // Change the implementation of the get method
 // Before getting info from apiClient.get I need to check if there is cache info. 
