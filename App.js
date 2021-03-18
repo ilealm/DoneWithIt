@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, View, Image, Text } from 'react-native';
 import { AsyncStorage } from 'react-native';
 // this is defined in the stack library
@@ -8,7 +8,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import NetInfo,  { useNetInfo } from '@react-native-community/netinfo';
-import jwtDecode from 'jwt-decode';
 import AppLoading from 'expo-app-loading';
 
 
@@ -69,14 +68,10 @@ export default function App() {
     // state to know is the app is ready and I don't show splash windows
     const [isReady, setIsReady] = useState(false);
 
-    const restoreToken = async () => {
-      const token = await authStorage.getToken();
-      if (!token) return;
-
-      // decode the token that is returned from the token and store it
-      setUser(jwtDecode(token));
-
-    }
+    const restoreUser = async () => {      
+      const user = await authStorage.getUser();
+      if (user) setUser(user);
+    };
 
     // // restore the auth token only the first time
     // useEffect(() => {
@@ -87,7 +82,7 @@ export default function App() {
     if (!isReady){
       return (
         <AppLoading 
-            startAsync={restoreToken} 
+            startAsync={restoreUser} 
             onFinish={() => setIsReady(true)} 
             onError={console.warn}  // I NEED to have onError, otherwise will generate error
         />
