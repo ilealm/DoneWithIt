@@ -3,7 +3,6 @@
  */
 import { useState } from 'react';
 
-
 export default useAPI = ( apiFunc ) => {
   // var to store the listings I get from the server
   const [data, setData] = useState([]);
@@ -24,10 +23,13 @@ export default useAPI = ( apiFunc ) => {
     const response = await apiFunc(...args); 
     setLoading(false);
 
-    if (!response.ok) return setError(true);
+    // if (!response.ok) return setError(true);
       
-    setError(false);
+    // setError(false);
+    // setData(response.data);
+    setError(!response.ok);
     setData(response.data);
+    return response;
   };
 
   return { data, error, loading, request };
