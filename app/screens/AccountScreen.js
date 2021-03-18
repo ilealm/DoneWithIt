@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 // BE SURE TO IMPORT FlatList from react-Native, not gesture.
 // import { FlatList } from 'react-native-gesture-handler';
 import { View, StyleSheet, FlatList } from 'react-native'
 
+import AuthContext from '../auth/context';
 import { ListItem, ListItemSeparator } from "../components/lists";
 import Icon from '../components/Icon';
 import colors from '../config/colors';
 import routes from "../navigation/routes";
 import Screen from '../components/Screen';
+import authStorage from '../auth/storage';
 
 
 
@@ -31,13 +33,24 @@ const menuItems = [
 ]
 
 function AccountScreen({ navigation }) {
+  // const authContext = useContext(AuthContext);
+  const {user, setUser} = useContext(AuthContext);
+  // console.log(user)
+
+  const handleLogOut = () => {
+    // cleat the user from the context
+    setUser(null);
+    // clear the stored token (renamed storage to authStorge)
+    authStorage.removeToken();
+  }
+
   return (
     <Screen style={styles.screen}>
       {/* Here is an image on left, a title and subtitle on right. */}
       <View style={styles.container} >
         <ListItem
-          title="Iris Leal"
-          subTitle="Engineer"
+          title={ user.name }
+          subTitle={ user.email}
           image={require('../assets/dow.jpg')}  />
         </View>
       {/* here are the menu Items */}
@@ -67,7 +80,9 @@ function AccountScreen({ navigation }) {
       <ListItem
         title="Log out"
         IconComponent={
-          <Icon name="logout" backgroundColor="#ffe66d" /> }  />
+          <Icon name="logout" backgroundColor="#ffe66d" /> }  
+        onPress={handleLogOut}
+        />
     </Screen>
   );
 }

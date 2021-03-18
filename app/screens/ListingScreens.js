@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 // import { ActivityIndicator} from 'react-native';  
 
@@ -10,7 +10,7 @@ import listingsApi from "../api/listings";
 import routes from '../navigation/routes';
 import Screen from '../components/Screen';
 import AppText from '../components/Text';
-import { useAccessibilityInfo } from '@react-native-community/hooks';
+// import { useAccessibilityInfo } from '@react-native-community/hooks';
 import useApi from '../hooks/useApi';
 
 // const listings = [
@@ -40,11 +40,14 @@ function ListingScreens({ navigation }) {
   // BUT IF I WANT TO MAKE MULTIPLE API CALLS, I CAN DO THIS BETTER:
   const getListingsApi = useApi(listingsApi.getListings);
 
+  // BUG: the data if not loading in the device
+  // console.log(getListingsApi)
+
 
   // fill the api the first time the component is render, using useEffect
   useEffect(() => {
     // loadListings(1,2,3);  //example passign dummy args
-    getListingsApi.request(1,2,3);
+    getListingsApi.request();
   } , []); // execute only once, when is rendered
   
   // ALL THIS LOGIC WILL BE HANDLED MY useAPI
@@ -64,10 +67,12 @@ function ListingScreens({ navigation }) {
   return (
     <Screen style={styles.screen}>
       {/* Error handling */}
-      {getListingsApi.error && <>
-        <AppText>Couldn't retrive the listings.</AppText>
-       <Button title="Retry" onPress={loadListings} />
-      </>}
+      {getListingsApi.error && (
+        <>
+          <AppText>Couldn't retrieve the listings.</AppText>
+          <Button title="Retry" onPress={getListingsApi.request} />
+        </>
+      )}
 
       {/* I'm replacing this with lottie animation */}
       {/* <ActivityIndicator animating={loading} size="large" /> */}

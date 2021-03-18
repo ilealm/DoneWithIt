@@ -24,7 +24,7 @@ const addListing = (listing, onUploadProgress ) => {
     }));
 
     if (listing.location)
-      data.append('location', JSON.stringify(listing.location));  // i need to pass it to text
+      data.append(location, JSON.stringify(listing.location));  // i need to pass it to text
 
     return client.post(endpoint, data, {
       // this fun is called repetly while the request is been sent

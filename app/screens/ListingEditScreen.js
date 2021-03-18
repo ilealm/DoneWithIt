@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { BackHandler, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 
 
@@ -106,7 +106,7 @@ function ListingEditScreen() {
     // listingsApi.addListing(listing) // but here is missing the location
     const result = await listingsApi.addListing({...listing, location},
         // progress => console.log(progress) // callback fun to call while uploading
-        progress => setProgress(progress) // callback fun to call while uploading
+        (progress) => setProgress(progress) // callback fun to call while uploading
       ); // here I'm passing an object with the listing AND the location
     
       
@@ -116,7 +116,8 @@ function ListingEditScreen() {
         return alert('Could not save the listing.');
       }
 
-      resetForm(); // this only reset the image and category
+      resetForm(); // this only reset the image and category. resetForm (is a function) forms part of FormikBag,
+      // TODO update the state of the listing so the added listing shows there wo refeshing
   };
 
 

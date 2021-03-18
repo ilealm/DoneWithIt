@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, View, Image, Text } from 'react-native';
 import { AsyncStorage } from 'react-native';
 // this is defined in the stack library
@@ -8,6 +8,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import NetInfo,  { useNetInfo } from '@react-native-community/netinfo';
+import jwtDecode from 'jwt-decode';
+import AppLoading from 'expo-app-loading';
+
+
 
 // import AccountScreen from './app/screens/AccountScreen';
 import AuthNavigator from './app/navigation/AuthNavigator';
@@ -26,8 +30,9 @@ import AuthNavigator from './app/navigation/AuthNavigator';
 import ListingEditScreen from './app/screens/ListingEditScreen';
 import navigationTheme from './app/navigation/navigationTheme';
 import AppNavigator from './app/navigation/AppNavigator';
-import { endAsyncEvent } from 'react-native/Libraries/Performance/Systrace';
 import OfflineNotice from './app/components/OfflineNotice';
+import AuthContext from './app/auth/context';
+import authStorage from './app/auth/storage';
 // import TextInput from './app/components/TextInput';
 // import ViewImageScreen from './app/screens/ViewImageScreen';
 // import WelcomeScreen from './app/screens/WelcomeScreen';
@@ -60,14 +65,47 @@ export default function App() {
 
   // demo();
 
+    const [user, setUser] = useState();
+    // state to know is the app is ready and I don't show splash windows
+    const [isReady, setIsReady] = useState(false);
+
+    const restoreToken = async () => {
+      const token = await authStorage.getToken();
+      if (!token) return;
+
+      // decode the token that is returned from the token and store it
+      setUser(jwtDecode(token));
+
+    }
+
+    // // restore the auth token only the first time
+    // useEffect(() => {
+    //   // renamed the symbol storage to authStorage
+    //   restoreToken();
+    // }, []);
+
+    if (!isReady){
+      return (
+        <AppLoading 
+            startAsync={restoreToken} 
+            onFinish={() => setIsReady(true)} 
+            onError={console.warn}  // I NEED to have onError, otherwise will generate error
+        />
+    );}
+    
+
   return (
-    <> 
+    // all the values I pass will be accesable to all the components inside the provider.
+    // BS I want to pass the user and the fun to update it, I need to pass an object with 2 props
+    // <AuthContext.Provider value={user}> 
+    <AuthContext.Provider value={{ user, setUser }}> 
       <OfflineNotice />
       <NavigationContainer theme={navigationTheme}>
         {/* Depending on user auth, is what I will display */}
-        {/* <AuthNavigator /> */}
-        <AppNavigator />
+        {user ? <AppNavigator /> 
+              : <AuthNavigator /> 
+        }
       </NavigationContainer>   
-    </>
+    </AuthContext.Provider>
   );
 }
