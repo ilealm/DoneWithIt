@@ -11,7 +11,10 @@ import authStorage from '../auth/storage';
 // URL MUST be capitalized letters. 
 // in development, is pointing to my machine. DO NOT use localhost BC andriod is not going to be able to see the API
 const apiClient = create({
-  baseURL: 'http://127.0.0.1:9000/api',
+  // esta es localhost, el simulador lo puede ver pero no los dispositivos reales
+  // baseURL: 'http://127.0.0.1:9000/api',
+  // necesito poner la IP de mi maquina, para q los demas lo puedan ver
+  baseURL: 'http://192.168.1.6:9000/api'
 });
 
 
