@@ -7,9 +7,11 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 // I need this two for handling the notification token
 import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';
+
  
 
 import AccountNavigator from './AccountNavigator';
+import expoPushTokensApi from '../api/expoPushTokens';
 import FeedNavigator from './FeedNavigator';
 import ListingEditScreen from '../screens/ListingEditScreen';
 import NewListingButton from './NewListingButton';
@@ -22,7 +24,7 @@ const AppNavigator = () => {
   useEffect(() => {
     registerForPushNotifications();
   }, []); //call it only once
-  
+
   const registerForPushNotifications = async () => {
     try {
       // I will use permissions module to get the user's permissions
@@ -32,7 +34,9 @@ const AppNavigator = () => {
   
       // get the push notification token
       const token = await Notifications.getExpoPushTokenAsync();
-      console.log(token)
+      // console.log(token)
+      // send the token to the server. I don't need to await the call BC I don't have something to do after.
+      expoPushTokensApi.register(token);
     }
     catch (error){
       console.log('Error getting a push token', error);
