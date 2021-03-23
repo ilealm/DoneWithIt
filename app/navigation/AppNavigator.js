@@ -8,8 +8,6 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';
 
- 
-
 import AccountNavigator from './AccountNavigator';
 import expoPushTokensApi from '../api/expoPushTokens';
 import FeedNavigator from './FeedNavigator';
@@ -23,6 +21,10 @@ const Tab = createBottomTabNavigator();
 const AppNavigator = () => {
   useEffect(() => {
     registerForPushNotifications();
+    // listener for notifications
+    // I can see the log in metro bundler. I need to tap the notification to see it
+    Notifications.addListener(notification => console.log(notification));
+
   }, []); //call it only once
 
   const registerForPushNotifications = async () => {
