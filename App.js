@@ -35,8 +35,7 @@ import authStorage from './app/auth/storage';
 // import TextInput from './app/components/TextInput';
 // import ViewImageScreen from './app/screens/ViewImageScreen';
 // import WelcomeScreen from './app/screens/WelcomeScreen';
-
-
+import { navigationRef } from './app/navigation/rootNavigation';
 
 
 export default function App() { 
@@ -87,7 +86,7 @@ export default function App() {
             onError={console.warn}  // I NEED to have onError, otherwise will generate error
         />
     );}
-    
+
 
   return (
     // all the values I pass will be accesable to all the components inside the provider.
@@ -95,7 +94,7 @@ export default function App() {
     // <AuthContext.Provider value={user}> 
     <AuthContext.Provider value={{ user, setUser }}> 
       <OfflineNotice />
-      <NavigationContainer theme={navigationTheme}>
+      <NavigationContainer ref={navigationRef} theme={navigationTheme}>
         {/* Depending on user auth, is what I will display */}
         {user ? <AppNavigator /> 
               : <AuthNavigator /> 
