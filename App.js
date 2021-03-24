@@ -9,7 +9,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import NetInfo,  { useNetInfo } from '@react-native-community/netinfo';
 import AppLoading from 'expo-app-loading';
-
+import { Notifications } from 'expo' 
 
 
 // import AccountScreen from './app/screens/AccountScreen';
@@ -35,34 +35,12 @@ import authStorage from './app/auth/storage';
 // import TextInput from './app/components/TextInput';
 // import ViewImageScreen from './app/screens/ViewImageScreen';
 // import WelcomeScreen from './app/screens/WelcomeScreen';
+import Screen from './app/components/Screen';
 import { navigationRef } from './app/navigation/rootNavigation';
+import LocalNotifications from './app/screens/LocalNotifications';
 
 
 export default function App() { 
-  // get info of the conection, using the method fetch which returns a promise. I can use await or .then
-  // NetInfo.fetch().then(netInfo => {console.log(netInfo)})
-  // addEventListener: subscribe to network status changes. Pass a func. that will be called everytime the network status changes
-  // The first time it returns 2 objs, and 1rst says isInternetReachable=null, then the other times says isInternetReachable=true
-  // const unsubscribe =  NetInfo.addEventListener(netInfo => console.log(netInfo))
-  // // don't forget to unsubscribe BC if not I will have memory leak 
-  // unsubscribe();
-  // but I can have all this manage using useNetInfo hook, which handles the subcribe and unsubscribe
-  // const netInfo = useNetInfo();
-  // const demo = async () => {
-  //   try{
-  //     await AsyncStorage.setItem('person', JSON.stringify({id:1}));
-  //     // to read
-  //     const value = await AsyncStorage.getItem('person');
-  //     const person = JSON.parse(value);
-  //     console.log(person);
-  //   } 
-  //   catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
-  // demo();
-
     const [user, setUser] = useState();
     // state to know is the app is ready and I don't show splash windows
     const [isReady, setIsReady] = useState(false);
@@ -72,12 +50,7 @@ export default function App() {
       if (user) setUser(user);
     };
 
-    // // restore the auth token only the first time
-    // useEffect(() => {
-    //   // renamed the symbol storage to authStorage
-    //   restoreToken();
-    // }, []);
-
+ 
     if (!isReady){
       return (
         <AppLoading 
@@ -87,19 +60,25 @@ export default function App() {
         />
     );}
 
+ 
 
   return (
-    // all the values I pass will be accesable to all the components inside the provider.
-    // BS I want to pass the user and the fun to update it, I need to pass an object with 2 props
-    // <AuthContext.Provider value={user}> 
-    <AuthContext.Provider value={{ user, setUser }}> 
-      <OfflineNotice />
-      <NavigationContainer ref={navigationRef} theme={navigationTheme}>
-        {/* Depending on user auth, is what I will display */}
-        {user ? <AppNavigator /> 
-              : <AuthNavigator /> 
-        }
-      </NavigationContainer>   
-    </AuthContext.Provider>
+    // // all the values I pass will be accesable to all the components inside the provider.
+    // // BS I want to pass the user and the fun to update it, I need to pass an object with 2 props
+    // // <AuthContext.Provider value={user}> 
+    // <AuthContext.Provider value={{ user, setUser }}> 
+    //   <OfflineNotice />
+    //   <NavigationContainer ref={navigationRef} theme={navigationTheme}>
+    //     {/* Depending on user auth, is what I will display */}
+    //     {user ? <AppNavigator /> 
+    //           : <AuthNavigator /> 
+    //     }
+    //   </NavigationContainer>   
+    // </AuthContext.Provider>
+    // <LocalNotifications />
+    
+    <LocalNotifications />
+
+      
   );
 }

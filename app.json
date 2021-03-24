@@ -28,6 +28,9 @@
     "web": {
       "favicon": "./app/assets/favicon.png"
     },
-    "description": "Market App created using React Native."
+    "description": "Market App created using React Native.",
+    "notification":{
+      "iosDisplayInForeground": true
+    }
   }
 }
