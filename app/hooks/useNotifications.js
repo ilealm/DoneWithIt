@@ -6,25 +6,22 @@ import * as Permissions from 'expo-permissions';
 
 import expoPushTokensApi from '../api/expoPushTokens';
 
-import navigation from '../navigation/rootNavigation';
-
-
 export default useNotifications = (notificationListener) => {
+  console.log('the notificationListener is', notificationListener);
   // if I want to useNavigation I will get an error
   useEffect(() => {
     registerForPushNotifications();
     // listener for notifications
     // I can see the log in metro bundler. I need to tap the notification to see it
     // Notifications.addListener(notification => console.log(notification));
-    Notifications.addListener(notification => {
-      // take the user to a different screen now that the user has touched the notification
-      navigation.navigate('Account');
-    });
+    // Notifications.addListener(notification => {
+    //   // take the user to a different screen now that the user has touched the notification
+    //   navigation.navigate('Account');
+    // });
 
-    // THIS IS NOT WORKING. FOR NOW I WILL LET HARDCODED IN LINE 19
-    // instead of hardcoding the function to navigate, I will accept an argument
-    // if (notificationListener)
-    //   Notifications.addListener(notificationListener);
+    // instead of hardcoding the function to navigate in line 17, I will accept an argument
+    if (notificationListener)
+      Notifications.addListener(notificationListener);
   }, []); //call it only once
 
   const registerForPushNotifications = async () => {

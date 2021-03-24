@@ -21,7 +21,10 @@ const Tab = createBottomTabNavigator();
 // NOTE: Here I cant have access to { navigation } BC is only accesible to screen components! 
 // here AppNavigator is a root navigator. Using a refHook (in App) I can access to it
 const AppNavigator = () => {
-  useNotifications();
+  useNotifications(notification => {
+    // take the user to a different screen now that the user has touched the notification
+    navigation.navigate('Account') }
+  );
 
   return (
   <Tab.Navigator>
