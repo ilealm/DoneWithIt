@@ -63,21 +63,15 @@ export default function App() {
  
 
   return (
-    // // all the values I pass will be accesable to all the components inside the provider.
-    // // BS I want to pass the user and the fun to update it, I need to pass an object with 2 props
-    // // <AuthContext.Provider value={user}> 
-    // <AuthContext.Provider value={{ user, setUser }}> 
-    //   <OfflineNotice />
-    //   <NavigationContainer ref={navigationRef} theme={navigationTheme}>
-    //     {/* Depending on user auth, is what I will display */}
-    //     {user ? <AppNavigator /> 
-    //           : <AuthNavigator /> 
-    //     }
-    //   </NavigationContainer>   
-    // </AuthContext.Provider>
-    // <LocalNotifications />
-    
-    <LocalNotifications />
+    // all the values I pass will be accesable to all the components inside the provider.
+    // BS I want to pass the user and the fun to update it, I need to pass an object with 2 props
+    // <AuthContext.Provider value={user}> 
+    <AuthContext.Provider value={{ user, setUser }}>
+      <OfflineNotice />
+      <NavigationContainer ref={navigationRef} theme={navigationTheme}>
+        {user ? <AppNavigator /> : <AuthNavigator />}
+      </NavigationContainer>
+    </AuthContext.Provider>
 
       
   );
