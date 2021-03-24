@@ -31,11 +31,11 @@ function ListingDetailsScreen({ route }) {
     //   </View>
     // </View>
     // NOW that I have this component inside the navigation, I can access route.
+    // I need to have this component so in a real device I can see the keyboard and the input boxes!
     <KeyboardAvoidingView
-      behavior="position"
-      KeyboardAvoidingView={Platform.OS === "ios" ? 0 : 100}
-    >
-      <View>      
+          behavior="position"
+          keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 100}
+    >      
         <Image  style={styles.image} 
                 preview={{uri: listing.images[0].thumbnailUrl}}
                 tint='light'
@@ -54,8 +54,7 @@ function ListingDetailsScreen({ route }) {
             />
         </View>
         <ContactSellerForm listing={ listing } />
-      </View>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
     );
 }
 

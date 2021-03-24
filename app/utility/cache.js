@@ -6,7 +6,8 @@
  * https://react-native-async-storage.github.io/async-storage/docs/usage/
  */
 import { AsyncStorage } from 'react-native';
-import moment from 'moment';
+// import moment from 'moment'; I not longer use this BC is to heavy. Replace it with dayjs
+import dayjs from 'dayjs';
 
 const prefix = 'cache'; //I dont need this, is just to have more explicit code
 const expiryInMinutes = 5; // here I can declare the time I want. In this case I will say that if the item is old by 5 min, is expired
@@ -28,10 +29,14 @@ const store = async (key, value) => {
 
 // BC get only should return an item, I need to have a function that detects if the item is expired or not.
 const isExpired = (item) => {
-  const now = moment(Date.now());
-  const storedTime = moment(item.timestam);    
+  // const now = moment(Date.now());
+  // const storedTime = moment(item.timestam);    
+  // return now.diff(storedTime, 'minutes') > expiryInMinutes;  
 
-  return now.diff(storedTime, 'minutes') > expiryInMinutes;  
+  const now = dayjs(); // WO arguents will return the current daytime
+  const storedTime = dayjs(item.timestam);    
+
+  return now.diff(storedTime, 'minute') > expiryInMinutes;  
 }
 
 
