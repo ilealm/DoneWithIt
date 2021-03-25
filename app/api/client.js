@@ -5,6 +5,8 @@
  * In some cases: If I succesfuly get the info, I'm caching it if not and I have it in cache I retrive it
  */
 import { create } from 'apisauce';
+
+import settings from '../config/settings';
 import cache from '../utility/cache';
 import authStorage from '../auth/storage';
 
@@ -14,7 +16,9 @@ const apiClient = create({
   // esta es localhost, el simulador lo puede ver pero no los dispositivos reales
   // baseURL: 'http://127.0.0.1:9000/api',
   // necesito poner la IP de mi maquina, para q los demas lo puedan ver
-  baseURL: 'http://192.168.1.6:9000/api'
+  // baseURL: 'http://192.168.1.6:9000/api'
+  baseURL: settings.apiUrl
+
 });
 
 
