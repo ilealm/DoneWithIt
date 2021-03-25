@@ -12,6 +12,7 @@ import AppLoading from 'expo-app-loading';
 import { Notifications } from 'expo' 
 
 
+import logger from './app/utility/logger';
 // import AccountScreen from './app/screens/AccountScreen';
 import AuthNavigator from './app/navigation/AuthNavigator';
 // import Card from './app/components/Card';
@@ -40,7 +41,14 @@ import { navigationRef } from './app/navigation/rootNavigation';
 import LocalNotifications from './app/screens/LocalNotifications';
 
 
+
+// start the logger
+logger.start();
+
 export default function App() { 
+  // test the error logger
+  // logger.log(new Error("Error in app"));
+
     const [user, setUser] = useState();
     // state to know is the app is ready and I don't show splash windows
     const [isReady, setIsReady] = useState(false);
