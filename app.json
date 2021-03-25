@@ -29,8 +29,21 @@
       "favicon": "./app/assets/favicon.png"
     },
     "description": "Market App created using React Native.",
-    "notification":{
+    "notification": {
       "iosDisplayInForeground": true
+    },
+    "extra": {
+      "bugsnag": {
+        "apiKey": "0a121f00ee198975f5dd0a005dc6e015"
+      }
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "@bugsnag/expo/hooks/post-publish.js",
+          "config": {}
+        }
+      ]
     }
   }
 }
