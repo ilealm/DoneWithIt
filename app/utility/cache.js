@@ -8,7 +8,7 @@
 import { AsyncStorage } from 'react-native';
 // import moment from 'moment'; I not longer use this BC is to heavy. Replace it with dayjs
 import dayjs from 'dayjs';
-import logger from './logger';
+// import logger from './logger';
 
 const prefix = 'cache'; //I dont need this, is just to have more explicit code
 const expiryInMinutes = 5; // here I can declare the time I want. In this case I will say that if the item is old by 5 min, is expired
@@ -23,8 +23,8 @@ const store = async (key, value) => {
 
   }
   catch(error) {
-    // console.log(error);
-    logger.log(error);
+    console.log(error);
+    // logger.log(error);
   }
 }
 
@@ -62,8 +62,8 @@ const get = async (key) => {
     return item.value;
   }
   catch(error){
-    // console.log(error);
-    logger.log(error);
+    console.log(error);
+    // logger.log(error);
   }
 }
 

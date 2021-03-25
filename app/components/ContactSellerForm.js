@@ -5,7 +5,7 @@ import * as Yup from "yup";
 
 import { Form, FormField, SubmitButton } from "./forms";
 import messagesApi from "../api/messages";
-import logger from "../utility/logger";
+// import logger from "../utility/logger";
 
 function ContactSellerForm({ listing }) {
   // message is a field from the form, the resetForm is from formik
@@ -16,8 +16,8 @@ function ContactSellerForm({ listing }) {
     const result = await messagesApi.send(message, listing.id);
 
     if (!result.ok) {
-      // console.log("Error", result);
-      logger.log("Error", result);
+      console.log("Error", result);
+      // logger.log("Error", result);
       return Alert.alert("Error", "Could not send the message to the seller.");
     }
 
